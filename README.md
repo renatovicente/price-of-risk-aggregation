@@ -79,7 +79,7 @@ The author's manuscript version, in three builds from one source:
 
 | File | Contents |
 |---|---|
-| `paper/heterogeneous.pdf` | the paper alone, 16 pages |
+| `paper/aggregation.pdf` | the paper alone, 16 pages |
 | `paper/supplement.pdf` | the supplement alone, 3 pages |
 | `paper/submission.pdf` | both in one PDF, 19 pages |
 

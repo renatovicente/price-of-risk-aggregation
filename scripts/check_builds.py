@@ -1,10 +1,10 @@
 """Regression check: the supplement must read the same in both builds.
 
-heterogeneous/ produces three PDFs from two shared bodies:
+aggregation/ produces three PDFs from two shared bodies:
 
-    heterogeneous.pdf   the paper alone
-    supplement.pdf      the supplement alone
-    submission.pdf      both in one file
+    aggregation.pdf   the paper alone
+    supplement.pdf    the supplement alone
+    submission.pdf    both in one file
 
 The supplement's references to the paper go through \\paperref and \\paperrefii,
 which the two shells define differently -- literal text in the standalone build,
@@ -24,9 +24,10 @@ from pathlib import Path
 import pypdf
 
 ROOT = Path(__file__).resolve().parent.parent
-# "heterogeneous/" in the working repository, "paper/" in the replication package
-HERE = next((ROOT / d for d in ("heterogeneous", "paper")
-             if (ROOT / d / "submission.pdf").exists()), None)
+# the PDFs sit beside this folder in the working repository, under paper/ in the
+# replication package
+HERE = next((c for c in (ROOT, ROOT / "paper")
+             if (c / "submission.pdf").exists()), None)
 START = "This supplement reports"
 
 
@@ -73,7 +74,7 @@ def supplement_body(path):
 
 def main():
     if HERE is None:
-        sys.exit("could not find submission.pdf under heterogeneous/ or paper/")
+        sys.exit("could not find submission.pdf beside this folder or under paper/")
     a = supplement_body(HERE / "supplement.pdf")
     b = supplement_body(HERE / "submission.pdf")
 
