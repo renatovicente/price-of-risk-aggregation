@@ -32,20 +32,20 @@ S\~ao Paulo. \texttt{rvicente@ime.usp.br}}}
 \begin{abstract}
 In a one-period CARA economy with Gaussian payoffs, exogenous quantities and
 endogenous prices, each investor compares his wealth to a weighted average over
-a network of peers. Equilibrium demand scales solve a Katz--Bonacich system,
-and prices are explicit in one scalar, the effective market coefficient, which
-is itself independent of prices; the market Sharpe ratio is proportional to it.
-We characterise how the network aggregates risk aversion through two limits
-available for every network. At zero comparison intensity the marginal effect is
-a quadratic form in risk tolerances, which is a Dirichlet form --- hence
-non-negative --- exactly when attention is balanced, in the sense that the
-influence matrix is doubly stochastic. Under intense comparison the coefficient
-converges to a stationary average of individual coefficients, weighted by
-influence rather than by population. The two limits organise the rest.
-Comparison lowers the effective coefficient, and so raises prices, whenever
-stationary influence favours the less risk averse; it interpolates from the
-harmonic to the arithmetic mean when influence is spread evenly; and it does
-nothing at all when the network splits into blocks homogeneous in type. A
+a network of peers. Equilibrium demand scales solve a Katz--Bonacich system, and
+prices are explicit in one scalar, the effective market coefficient, which is
+itself independent of prices; the market Sharpe ratio is proportional to it. Two
+limits, available for every network, organise how the network aggregates risk
+aversion. At zero comparison intensity the marginal effect is a quadratic form
+in risk tolerances, and a doubly stochastic influence matrix --- balanced
+attention --- makes it a Dirichlet form, hence non-negative for every profile of
+tolerances. Under intense comparison the coefficient converges to a stationary
+average of individual coefficients, weighted by influence rather than by
+population. It then falls below its no-comparison value, taking the Sharpe ratio
+with it, whenever stationary influence sufficiently favours the less risk
+averse; it interpolates from the harmonic to the arithmetic mean when influence
+is spread evenly; and it does not move at all when the network splits into
+blocks homogeneous in type. A
 separate result is that comparison is exactly neutral, for every network and
 every profile of intensities, when net risk aversion is common.
 \end{abstract}
@@ -367,8 +367,9 @@ equilibrium admissible, exactly when
 \label{eq:positive}
 \end{equation}
 %
-which holds for every $\theta_M$ small enough and is the only parameter
-restriction the closure imposes. All the results below concern $\theta_M$, so
+which is the only parameter restriction the closure imposes; parameters
+satisfying it are called admissible. If in addition $\vec\mu\gg0$, every
+sufficiently small $\theta_M$ is admissible. All the results below concern $\theta_M$, so
 they are statements about \eqref{eq:price}.
 
 \subsection{Returns and the price of risk}
@@ -409,9 +410,14 @@ S_M=\frac{\E[R_M]-R_f}{\mathrm{sd}(R_M)}
 The first is the market price of risk per unit of variance; the second is the
 Sharpe ratio, and it is $\bth$ multiplied by a constant that lives entirely on
 the payoff side. Every comparative static in $\bth$ below is therefore a
-comparative static in the price of risk, in the strict sense, and by
-\eqref{eq:price} a fall in $\bth$ raises every price whose row of $V\vec\nu$ is
-positive.
+comparative static in the price of risk, in the strict sense. The
+unconditional statements are the aggregate ones: a fall in $\bth$ lowers the
+market Sharpe ratio and the market risk premium. Statements about individual
+prices are conditional, since
+$\partial p_i/\partial\theta_M=-(V\vec\nu)_i/R_f$, so that a fall in $\bth$
+raises $p_i$ exactly when $(V\vec\nu)_i>0$ --- when asset $i$ covaries
+positively with the market payoff. Assets that hedge the market move the other
+way.
 
 \begin{remark}[On the riskless rate]
 \label{rem:rf}
@@ -430,8 +436,12 @@ R_f=\frac{\vec\mu^{\top}\vec\nu-\theta_M\,\vec\nu^{\top}V\vec\nu}
 Both closures leave \eqref{eq:price}--\eqref{eq:sharpe} intact, since neither
 touches $\theta_M$; they differ only in whether $W_M$ or $R_f$ is the free
 quantity. Under the second, the market value of the risky assets equals
-aggregate initial wealth, and comparison lowers the riskless rate whenever it
-lowers $\bth$.
+aggregate initial wealth, and since
+$\partial R_f/\partial\theta_M=-\vec\nu^{\top}V\vec\nu/\sum_aW_a^0<0$,
+comparison \emph{raises} the riskless rate whenever it lowers $\bth$. That
+closure also fixes $\vec\nu^{\top}\vec p=\sum_aW_a^0$, so prices cannot all move
+in the same direction: a fall in $\bth$ redistributes value across assets
+instead of raising the aggregate.
 \end{remark}
 
 %=====================================================================
@@ -587,10 +597,31 @@ $\sum_{a,j}A_{aj}(t_a^{2}+t_j^{2})/2
 =\tfrac12\big(\sum_at_a^{2}+\sum_jt_j^{2}\big)=\vec t^{\top}\vec t$, and
 therefore
 $\tfrac12\sum_{a,j}A_{aj}(t_a-t_j)^{2}
-=\vec t^{\top}\vec t-\vec t^{\top}A\vec t$, which is \eqref{eq:dirichlet}. The
-last claim follows from the example of Proposition~\ref{prop:reversal}, whose
-column sums are $(2,1,0)$.
+=\vec t^{\top}\vec t-\vec t^{\top}A\vec t$, which is \eqref{eq:dirichlet}. For
+the last claim take
+%
+\begin{equation*}
+A=\begin{pmatrix}0&1&0\\1&0&0\\0&1&0\end{pmatrix},
+\qquad
+\vec\theta=(1,1,2),
+\qquad
+\vec t=\big(1,1,\tfrac12\big),
+\end{equation*}
+%
+which satisfies Assumption~\ref{ass:norm} and has column sums $(1,2,0)$. Here
+$A\vec t=\mathbf 1$, so $\vec t^{\top}A\vec t=\tfrac52$ while
+$\vec t^{\top}\vec t=\tfrac94$, giving
+$\vec t^{\top}(\mathbb{I}-A)\vec t=-\tfrac14$ and
+$\bth'(0)=3(-\tfrac14)/(\tfrac52)^{2}=-\tfrac{3}{25}<0$.
 \end{proof}
+
+In that example the two least risk averse investors absorb all the attention and
+the most risk averse receives none, so $\vec\pi=(\tfrac12,\tfrac12,0)$ and
+$\vec\pi^{\top}\vec\theta=1<\tfrac65=H(\theta)$. The effect is negative at the
+origin and the limit lies below the starting value, and $\bth$ in fact falls
+monotonically from $6/5$ to $1$. It is the complement of
+Proposition~\ref{prop:reversal} below, where the marginal effect is positive and
+the decline sets in only at higher intensity.
 
 Equation \eqref{eq:dirichlet} is a Dirichlet form: the marginal effect of
 comparison is a weighted sum of squared differences in risk tolerance across
@@ -598,9 +629,10 @@ the links of the network. It is positive exactly when investors look at
 somebody unlike themselves, and the relevant notion of ``unlike'' is difference
 in tolerance, not in aversion. Double stochasticity is what makes the quadratic
 form a Dirichlet form; economically it says that attention is balanced, each
-investor receiving as much of it as he gives. When attention is unbalanced the
-identity fails and the sign is free, which is the content of the counterexample
-below.
+investor receiving as much of it as he gives. It is the balance of attention,
+not the profile of tolerances, that the condition constrains: for a given
+$\vec t$ the form may well be non-negative without it, but double stochasticity
+is what makes it non-negative for \emph{every} $\vec t$.
 
 \subsection{The limit of intense comparison}
 \label{sec:intense}
@@ -681,8 +713,7 @@ that follow are the three ways \eqref{eq:intense} can turn out.
 \label{prop:mf}
 Let $\lambda_a=\lambda$ for all $a$ and consider a sequence of economies
 indexed by $m$ in which the empirical distribution of $\theta_a$ converges
-weakly to a law with $\E[(\theta+\lambda)^{-1}]<\infty$ and
-$\{(\theta+\lambda)^{-1}\}$ uniformly integrable. Suppose the networks satisfy
+weakly to a law. Suppose the networks satisfy
 %
 \begin{equation}
 \theta_a\geq\underline\theta>0\ \text{ for all }a,\ m,
@@ -718,8 +749,11 @@ we do not claim it is the limit of the derivatives of the finite economies.
 \end{proposition}
 
 \begin{proof}
-By Lemma~\ref{lem:bound}, $\|\vec c\|_\infty\leq1/\underline\theta$ uniformly in
-$m$ and $\lambda$. Hence
+Since $\theta_a\geq\underline\theta$, the variable $(\theta+\lambda)^{-1}$ is
+bounded by $(\underline\theta+\lambda)^{-1}$, so weak convergence alone gives
+convergence of $\E[(\theta+\lambda)^{-1}]$ and no separate integrability
+hypothesis is needed. By Lemma~\ref{lem:bound},
+$\|\vec c\|_\infty\leq1/\underline\theta$ uniformly in $m$ and $\lambda$. Hence
 $\big|\sum_jA_{aj}c_j-\bar c_m\big|
 =\big|(A_{a\cdot}-m^{-1}\mathbf 1)^{\top}\vec c\big|
 \leq\delta_m\|\vec c\|_\infty\leq\delta_m/\underline\theta\to0$
@@ -962,14 +996,14 @@ financial sophistication is a documented feature of social networks
 \section{Conclusion}
 
 Relative wealth concerns in a CARA economy aggregate through the influence
-network in a way that two limits describe completely. The marginal effect at
+network in a way that two limits organise. The marginal effect at
 zero comparison is a quadratic form in risk tolerances, which is a Dirichlet
 form --- and so non-negative --- exactly when attention is balanced. The limit
 under intense comparison is a stationary average of individual coefficients,
-weighted by influence rather than by population. Between them these two
-statements account for the mean-field interpolation from the harmonic to the
-arithmetic mean, for non-monotonicity and sign reversal, and for the complete
-inertness of the aggregate under perfect homophily by type. What decides which
+weighted by influence rather than by population. They anchor the two ends of the family rather than tracing the path between
+them, but between them they account for the mean-field interpolation from the
+harmonic to the arithmetic mean, for non-monotonicity and sign reversal, and
+for the complete inertness of the aggregate under perfect homophily by type. What decides which
 case obtains is the correlation between net risk aversion and stationary
 influence.
 
@@ -977,8 +1011,12 @@ Because the economy is closed, these are statements about prices and not only
 about a conditional relation. Equilibrium prices are
 $\vec p=(\vec\mu-\theta_MV\vec\nu)/R_f$ and the market Sharpe ratio is
 $\bth\sqrt{\vec\nu^{\top}V\vec\nu}/m$, both explicit, because CARA demands carry
-no wealth effects and $\theta_M$ therefore does not depend on prices. A network
-that lowers $\bth$ raises every asset price and compresses every risk premium.
+no wealth effects and $\theta_M$ therefore does not depend on prices. A network that lowers $\bth$ compresses the market risk premium and the market
+Sharpe ratio. Its effect on an individual price has the sign of
+$(V\vec\nu)_i$, so assets that covary positively with the market payoff rise
+while hedges fall; and under the zero-net-supply closure, where
+$\vec\nu^{\top}\vec p$ is pinned to aggregate initial wealth, the riskless rate
+rises and value is redistributed across assets rather than created.
 
 One boundary should be kept in view. Here $\theta_a$ is risk aversion net of the
 comparison, not the coefficient of absolute risk aversion in own wealth, so
@@ -1021,7 +1059,7 @@ Lemma~\ref{lem:bound} and each of the three cases of \eqref{eq:intense}; and
 formula \eqref{eq:price}, the recovery of \eqref{eq:clear} and the Sharpe
 identity \eqref{eq:sharpe}. The scripts depend only on
 \texttt{numpy} and \texttt{scipy}, read no data and draw from fixed seeds;
-\texttt{./reproduce.sh} runs all four in about fifteen seconds.
+\texttt{./reproduce.sh} runs all six in about fifteen seconds.
 
 %=====================================================================
 \begin{thebibliography}{99}
@@ -1094,11 +1132,6 @@ Annual Review of Sociology 27 (2001) 415--444.
 \bibitem{panageas} S. Panageas,
 \emph{The implications of heterogeneity and inequality for asset pricing},
 NBER Working Paper 26974 (2020).
-
-\bibitem{ross} L. Ross, D. Greene, P. House,
-\emph{The false consensus effect: an egocentric bias in social perception and
-attribution processes},
-Journal of Experimental Social Psychology 13 (1977) 279--301.
 
 \end{thebibliography}
 

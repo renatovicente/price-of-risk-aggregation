@@ -113,8 +113,24 @@ if __name__ == "__main__":
 
     B = np.array([[0., 1., 0.], [1., 0., 0.], [1., 0., 0.]])
     TH = np.array([0.5, 1.0, 2.0])
-    print(f"\n    directed counterexample: column sums {B.sum(0)}, not doubly stochastic")
-    print(f"    theta_bar'(0) = {dtheta_bar_at_zero(B, TH):.9f}  (= 3/49 = {3/49:.9f})")
+    print(f"\n    without double stochasticity the sign is free. Proposition 2's")
+    print(f"    network has column sums {B.sum(0)} and a POSITIVE marginal effect,")
+    print(f"    theta_bar'(0) = {dtheta_bar_at_zero(B, TH):+.9f} (= 3/49 = {3/49:.9f});")
+    print(f"    it is the later decline that reverses the sign. For a NEGATIVE")
+    print(f"    marginal effect take instead")
+    Bneg = np.array([[0., 1., 0.], [1., 0., 0.], [0., 1., 0.]])
+    THneg = np.array([1.0, 1.0, 2.0])
+    tneg = 1.0 / THneg
+    print(f"    A rows {Bneg.tolist()}, theta = {THneg}, columns {Bneg.sum(0)}")
+    print(f"    t'(I-A)t = {tneg @ (np.eye(3) - Bneg) @ tneg:+.9f} (= -1/4)")
+    print(f"    theta_bar'(0) = {dtheta_bar_at_zero(Bneg, THneg):+.9f} (= -3/25 ="
+          f" {-3/25:+.9f})")
+    pineg = stationary(Bneg)
+    print(f"    pi = {np.round(pineg, 6)}, pi'theta = {pineg @ THneg:.6f}"
+          f" < H(theta) = {3 / np.sum(1 / THneg):.6f}")
+    print(f"    so this one falls monotonically:", end=" ")
+    print(", ".join(f"theta_bar({l:g})={theta_bar(Bneg, THneg, l):.6f}"
+                    for l in [0, 1, 1e4]))
 
     print("\n(3) Theorem 3, single recurrent class")
     for _ in range(3):
