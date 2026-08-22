@@ -76,7 +76,9 @@ run under considerably older versions.
 ## Paper
 
 `paper/heterogeneous.tex` and `paper/heterogeneous.pdf` are the author's
-manuscript version.
+manuscript version. `paper/supplement.tex` and `paper/supplement.pdf` hold the
+Monte Carlo design and the table of reversal frequencies, which
+`scripts/sign_reversal.py` reproduces.
 
 ## License
 

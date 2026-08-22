@@ -1,0 +1,153 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue,breaklinks=true]{hyperref}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bth}{\bar\theta}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+\title{Supplement to\\
+\emph{Relative Wealth Concerns, Network Aggregation,\\
+and Effective Risk Aversion}}
+\author{Renato Vicente\thanks{Dept.\ of Applied Mathematics, Instituto de
+Matem\'atica, Estat\'istica e Ci\^encia da Computa\c{c}\~ao, Universidade de
+S\~ao Paulo. \texttt{rvicente@ime.usp.br}}}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\noindent
+This supplement reports the simulation referred to in Section~5.4 of the paper.
+Notation follows the paper throughout: $\bth=m/\sum_ac_a$ is the effective
+market coefficient, $\vec c$ solves
+$[\D_{\theta+\lambda}-\D_{\lambda}A]\vec c=\mathbf 1$ with $\lambda_a=\lambda$
+common, $\theta_a$ is net risk aversion and $A$ the row-stochastic influence
+matrix.
+
+%=====================================================================
+\section{How often does reversal occur?}
+
+Proposition~2 of the paper exhibits a network on which comparison eventually
+lowers $\bth$, and Theorem~3 gives the condition
+$\vec\pi^{\top}\vec\theta<H(\theta)$ under which this happens. Neither says how
+common such networks are. That is a question about a distribution over networks
+rather than about the mechanism, and the answer depends entirely on which
+distribution is chosen. We report one.
+
+\subsection*{Design}
+
+Fix $\lambda=0.5$ and draw $20{,}000$ independent economies at each of ten
+combinations of population size $m$ and dispersion $\sigma$. Off-diagonal
+entries of $A$ are uniform on $(0,1)$ with zero diagonal, normalised by rows;
+net risk aversion is $\theta_a=\max\{1+\sigma Z_a,\,0.15\}$ with $Z_a$ standard
+normal. The population size is held \emph{fixed} within each row, so that
+comparison across rows identifies the effect of size and not of a changing
+ensemble. Seeds are $1000m+10\sigma$, set in \texttt{scripts/sign\_reversal.py}.
+
+Two distinct events are recorded and should not be conflated:
+%
+\begin{equation}
+\text{cumulative:}\quad \bth(0.5)<\bth(0),
+\qquad\qquad
+\text{marginal:}\quad \bth'(0.5)<0 .
+\label{eq:events}
+\end{equation}
+%
+The derivative is computed analytically rather than by finite differences.
+Writing $M(\lambda)=\D_{\theta}+\lambda(\mathbb{I}-A)$ and $\vec c=M^{-1}\mathbf 1$,
+%
+\begin{equation}
+\vec c\,'=-M^{-1}(\mathbb{I}-A)\vec c,
+\qquad
+\bth'=-\frac{m\,\mathbf 1^{\top}\vec c\,'}{(\mathbf 1^{\top}\vec c)^{2}} ,
+\label{eq:deriv-num}
+\end{equation}
+%
+so each draw costs two linear solves with the same factorisation of $M$.
+Intervals are Wilson intervals at $95$ per cent.
+
+\subsection*{Results}
+
+\begin{table}[htbp]
+\centering
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{cc@{\hskip 12pt}cc@{\hskip 12pt}cc}
+\hline
+& & \multicolumn{2}{c@{\hskip 12pt}}{cumulative: $\bth(0.5)<\bth(0)$}
+  & \multicolumn{2}{c}{marginal: $\bth'(0.5)<0$} \\
+$m$ & $\sigma$ & frequency & $95\%$ interval & frequency & $95\%$ interval \\
+\hline
+3  & 0.4 & 0.0919 & $[0.0879,\,0.0959]$ & 0.0952 & $[0.0912,\,0.0993]$ \\
+3  & 0.8 & 0.0340 & $[0.0316,\,0.0366]$ & 0.0372 & $[0.0346,\,0.0399]$ \\
+6  & 0.4 & 0.0057 & $[0.0047,\,0.0068]$ & 0.0062 & $[0.0052,\,0.0073]$ \\
+6  & 0.8 & 0.0008 & $[0.0005,\,0.0014]$ & 0.0008 & $[0.0005,\,0.0012]$ \\
+10 & 0.4 & 0.0001 & $[0.0000,\,0.0004]$ & 0.0001 & $[0.0000,\,0.0004]$ \\
+10 & 0.8 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
+20 & 0.4 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
+20 & 0.8 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
+60 & 0.4 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
+60 & 0.8 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
+\hline
+\end{tabular}
+\caption{Frequency of negative cumulative and marginal effects at
+$\lambda=0.5$, over $20{,}000$ draws per row with Wilson intervals. All ten
+cells of the design are reported; entries of $0.0000$ are exact zeros, no draw
+out of $20{,}000$ producing the event, and $0.0002$ is the upper endpoint of the
+$95\%$ Wilson interval when no event is observed.}
+\label{tab:reversal}
+\end{table}
+
+Under this design reversal is already below one per cent at $m=6$ and
+indistinguishable from zero at $m\geq10$. The two events move together, which is
+what one expects when $\bth$ is close to monotone over $[0,0.5]$, and the
+cumulative frequency is slightly the smaller of the two at every cell.
+
+\subsection*{What the table does and does not show}
+
+\paragraph{The decay in $m$ is a property of this ensemble.}
+As $m$ grows, the rows of $A$ approach the uniform distribution, so the design
+converges to the mean-field case of Proposition~1 of the paper, in which the
+influence matrix is approximately doubly stochastic and Theorem~2 makes the
+marginal effect non-negative. The decay is therefore mixing, not size. Remark~5
+of the paper makes this precise: replicating the network of Proposition~2 in
+disjoint blocks leaves $\bth(\lambda)$ unchanged for every population size,
+verified up to $m=3000$, and the reversal survives weak ties across blocks up to
+a mixing fraction of about $\epsilon=0.1$. Real influence structures carry
+communities, hubs and correlation between characteristics and network position,
+none of which this ensemble contains.
+
+\paragraph{The two dispersions are not a clean comparative static.}
+Reversal is rarer at $\sigma=0.8$ than at $\sigma=0.4$, but the difference
+cannot be read as an effect of dispersion alone. The truncation at $0.15$ binds
+for $14.4$ per cent of draws at $\sigma=0.8$ against $1.7$ per cent at
+$\sigma=0.4$, which changes the shape of the distribution of $\theta_a$ and
+raises $\E[\theta]$ from $1.00$ to $1.06$. We report both rows and draw no
+conclusion from their difference.
+
+\paragraph{Nothing here bears on the theorems.}
+Theorems~2 and 3 of the paper hold for every network satisfying Assumption~1.
+The table describes the measure of networks on which the two limits point in
+opposite directions under one particular sampling scheme, which is a question of
+prevalence and not of validity.
+
+%=====================================================================
+\section*{Replication}
+
+The table is produced by \texttt{scripts/sign\_reversal.py} and the block
+construction of Remark~5 by \texttt{scripts/block\_reversal.py}, in the
+repository
+%
+\begin{center}
+\url{https://github.com/renatovicente/price-of-risk-aggregation}
+\end{center}
+%
+Both are self-contained, depend only on \texttt{numpy} and \texttt{scipy}, read
+no data and draw from fixed seeds; \texttt{./reproduce.sh} runs them together
+with the rest in about fifteen seconds.
+
+\end{document}

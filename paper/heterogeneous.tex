@@ -861,71 +861,25 @@ value at infinity --- and the closed form only locates the turning point.
 
 How often reversal occurs is a question about a distribution over networks, and
 the answer is a property of that distribution rather than of the mechanism.
-Under the dense i.i.d.-weight design specified below it becomes rare as the
-number of investors grows: the rows of $A$ approach the uniform distribution, so
+Under a dense i.i.d.-weight design, specified in the supplement, it becomes rare
+as the number of investors grows: the rows of $A$ approach the uniform
+distribution, so
 by Remark~\ref{rem:consistency} the design converges to the mean-field case, in
 which \eqref{eq:dirichlet} applies and the effect is non-negative. Nothing in
 this licenses a claim about networks in general. Real influence structures carry
 communities, hubs and correlation between characteristics and position, and
 Remark~\ref{rem:blocks} shows that reversal survives at any population size once
 such structure is present.
-Table~\ref{tab:reversal} reports two distinct frequencies over $20{,}000$
-independent draws at each size: the \emph{cumulative} event
-$\bth(0.5)<\bth(0)$, and the \emph{marginal} event $\bth'(0.5)<0$. The
-derivative is computed analytically rather than by finite differences: writing
-$M(\lambda)=\D_{\theta}+\lambda(\mathbb{I}-A)$ and $\vec c=M^{-1}\mathbf 1$,
-%
-\begin{equation}
-\vec c\,'=-M^{-1}(\mathbb{I}-A)\vec c,
-\qquad
-\bth'=-\frac{m\,\mathbf 1^{\top}\vec c\,'}{(\mathbf 1^{\top}\vec c)^{2}} .
-\label{eq:deriv-num}
-\end{equation}
-%
-The number of investors is held fixed within each row, so that the comparison
-across rows identifies the effect of size. Off-diagonal entries of $A$ are
-uniform on $(0,1)$ before row normalisation, and
-$\theta_a=\max\{1+\sigma Z_a,\,0.15\}$ with $Z_a$ standard normal.
-
-\begin{table}[htbp]
-\centering
-\setlength{\tabcolsep}{5pt}
-\begin{tabular}{cc@{\hskip 12pt}cc@{\hskip 12pt}cc}
-\hline
-& & \multicolumn{2}{c@{\hskip 12pt}}{cumulative: $\bth(0.5)<\bth(0)$}
-  & \multicolumn{2}{c}{marginal: $\bth'(0.5)<0$} \\
-$m$ & $\sigma$ & frequency & $95\%$ interval & frequency & $95\%$ interval \\
-\hline
-3  & 0.4 & 0.0919 & $[0.0879,\,0.0959]$ & 0.0952 & $[0.0912,\,0.0993]$ \\
-3  & 0.8 & 0.0340 & $[0.0316,\,0.0366]$ & 0.0372 & $[0.0346,\,0.0399]$ \\
-6  & 0.4 & 0.0057 & $[0.0047,\,0.0068]$ & 0.0062 & $[0.0052,\,0.0073]$ \\
-6  & 0.8 & 0.0008 & $[0.0005,\,0.0014]$ & 0.0008 & $[0.0005,\,0.0012]$ \\
-10 & 0.4 & 0.0001 & $[0.0000,\,0.0004]$ & 0.0001 & $[0.0000,\,0.0004]$ \\
-10 & 0.8 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
-20 & 0.4 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
-20 & 0.8 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
-60 & 0.4 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
-60 & 0.8 & 0.0000 & $[0.0000,\,0.0002]$ & 0.0000 & $[0.0000,\,0.0002]$ \\
-\hline
-\end{tabular}
-\caption{Frequency of negative cumulative and marginal effects at
-$\lambda=0.5$, over $20{,}000$ draws per row with Wilson intervals. All ten
-cells of the design are reported; entries of $0.0000$ are exact zeros, no draw
-out of $20{,}000$ producing the event, and $0.0002$ is the upper endpoint of the
-$95\%$ Wilson interval when no event is observed. Under this design reversal is already below one
-per cent at $m=6$ and indistinguishable from zero at $m\geq10$. The decay in $m$
-is specific to this ensemble; see Remark~\ref{rem:blocks}. Reversal is also
-rarer at $\sigma=0.8$, but the two rows are not a clean comparative static in
-dispersion: the truncation at $0.15$ binds for $14.4$ per cent of draws at
-$\sigma=0.8$ against $1.7$ at $\sigma=0.4$, which moves the shape of the
-distribution and raises $\E[\theta]$ from $1.00$ to $1.06$. We report both rows
-and draw no conclusion from their difference.}
-\label{tab:reversal}
-\end{table}
+A supplement reports the frequency of both the cumulative event
+$\bth(0.5)<\bth(0)$ and the marginal event $\bth'(0.5)<0$ over $20{,}000$ draws
+at each of ten combinations of population size and dispersion, together with the
+generators, the seeds and the analytic derivative used. Reversal is already
+below one per cent at $m=6$ and indistinguishable from zero at $m\geq10$ in that
+ensemble.
 
 \begin{remark}[Reversal at any population size]
 \label{rem:blocks}
-The decay in Table~\ref{tab:reversal} reflects mixing, not size. Because
+The decay reported in the supplement reflects mixing, not size. Because
 \eqref{eq:system} is local, a block-diagonal $A$ decouples: each block solves
 its own system and $\bth=\big(m^{-1}\sum_ac_a\big)^{-1}$ is the reciprocal of
 the population-average capacity. Replicating an identical block leaves that
@@ -936,11 +890,11 @@ this numerically up to $m=3000$. The construction is robust to weak ties across
 blocks: mixing each row with a fraction $\epsilon$ of the uniform complete
 network preserves the reversal at $m=30$ for $\epsilon\leq0.1$
 ($\bth(1)=0.8526$ at $\epsilon=0.1$) and destroys it by $\epsilon=0.2$
-($\bth(1)=0.8681$). Table~\ref{tab:reversal} should therefore be read as
-describing a dense ensemble in which local benchmarks approach a common
-average, and not as a claim about large networks in general: block structure,
-or any persistent correlation between type and network position, sustains the
-reversal at arbitrary population size.
+($\bth(1)=0.8681$). The simulation should therefore be read as describing a
+dense ensemble in which local benchmarks approach a common average, and not as
+a claim about large networks in general: block structure, or any persistent
+correlation between type and network position, sustains the reversal at
+arbitrary population size.
 
 Note the contrast with Proposition~\ref{prop:homophily}, which uses the same
 block structure to the opposite end. There net risk aversion is constant
@@ -1048,8 +1002,8 @@ All numerical results are reproducible from the repository
 The module \texttt{scripts/network.py} solves \eqref{eq:system};
 \texttt{scripts/neutrality.py} verifies Theorem~\ref{thm:neutral} and
 Proposition~\ref{prop:mf}; \texttt{scripts/sign\_reversal.py} produces
-Table~\ref{tab:reversal}, including the network and type generators and the
-seeds; \texttt{scripts/block\_reversal.py} produces the block replication and
+the table in the supplement, including the network and type generators and
+the seeds; \texttt{scripts/block\_reversal.py} produces the block replication and
 the mixing robustness of Remark~\ref{rem:blocks}; and
 \texttt{scripts/characterization.py} checks Theorems~\ref{thm:deriv} and
 \ref{thm:intense}, the Dirichlet identity \eqref{eq:dirichlet}, the bound of
