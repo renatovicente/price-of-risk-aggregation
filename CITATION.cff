@@ -1,13 +1,14 @@
 cff-version: 1.2.0
 message: If you use this software, please cite both the paper and the software.
 title: >-
-  Replication package for "The Price of Risk When Aggregation Fails:
-  Relative Wealth Concerns with Heterogeneous Risk Aversion"
+  Replication package for "Relative Wealth Concerns, Network Aggregation,
+  and Effective Risk Aversion"
 abstract: >-
   Self-contained numerical verification of the results in the paper: the
-  neutrality theorem under common risk aversion, the mean-field aggregation
-  limit, the frequency of sign reversal in random influence networks, and the
-  block replication showing that reversal survives at arbitrary population size.
+  neutrality theorem under common net risk aversion, the marginal-effect and
+  stationary-limit characterisations, the mean-field aggregation limit, the
+  frequency of sign reversal in random influence networks, and the block
+  replication showing that reversal survives at arbitrary population size.
 type: software
 authors:
   - family-names: Vicente
