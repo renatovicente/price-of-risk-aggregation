@@ -34,6 +34,7 @@ Runtime is about fifteen seconds on a laptop.
 | `scripts/sign_reversal.py` | frequency of cumulative and marginal sign reversal, Wilson intervals | Table 1 |
 | `scripts/block_reversal.py` | block replication and robustness to mixing | Remark 5 |
 | `scripts/characterization.py` | Theorems 2 and 3, the Dirichlet identity, the uniform bound | Theorems 2-3, Lemma 1 |
+| `scripts/closed_economy.py` | equilibrium prices, market clearing, the Sharpe identity | Section 3 |
 
 ## Notes on the numerical design
 

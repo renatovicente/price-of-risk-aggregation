@@ -30,24 +30,24 @@ S\~ao Paulo. \texttt{rvicente@ime.usp.br}}}
 \maketitle
 
 \begin{abstract}
-In a CARA economy where each investor compares his wealth to a weighted average
-over a network of peers, equilibrium demand scales solve a Katz--Bonacich
-system. We characterise how the network aggregates risk aversion through two
-limits that hold for every network. At zero comparison intensity the marginal
-effect on the effective coefficient is a quadratic form in risk tolerances; when
-attention is balanced, in the sense that the influence matrix is doubly
-stochastic, that form is a Dirichlet form and the effect is non-negative,
-vanishing only if tolerance is constant across links. Under intense comparison
-the effective coefficient converges to a stationary average of individual
-coefficients, weighted by the stationary distribution of the influence matrix
-rather than by population. The two limits organise the rest. Comparison lowers
-the effective coefficient whenever stationary influence favours the less risk
-averse, which explains sign reversal; it interpolates from the harmonic to the
-arithmetic mean when influence is spread evenly, which is the mean-field case;
-and it does nothing at all when the network splits into blocks that are
-homogeneous in type, which is perfect homophily. A separate result is that the
-comparison is exactly neutral, for every network and every profile of
-intensities, when net risk aversion is common.
+In a one-period CARA economy with Gaussian payoffs, exogenous quantities and
+endogenous prices, each investor compares his wealth to a weighted average over
+a network of peers. Equilibrium demand scales solve a Katz--Bonacich system,
+and prices are explicit in one scalar, the effective market coefficient, which
+is itself independent of prices; the market Sharpe ratio is proportional to it.
+We characterise how the network aggregates risk aversion through two limits
+available for every network. At zero comparison intensity the marginal effect is
+a quadratic form in risk tolerances, which is a Dirichlet form --- hence
+non-negative --- exactly when attention is balanced, in the sense that the
+influence matrix is doubly stochastic. Under intense comparison the coefficient
+converges to a stationary average of individual coefficients, weighted by
+influence rather than by population. The two limits organise the rest.
+Comparison lowers the effective coefficient, and so raises prices, whenever
+stationary influence favours the less risk averse; it interpolates from the
+harmonic to the arithmetic mean when influence is spread evenly; and it does
+nothing at all when the network splits into blocks homogeneous in type. A
+separate result is that comparison is exactly neutral, for every network and
+every profile of intensities, when net risk aversion is common.
 \end{abstract}
 
 \noindent\textbf{Keywords:} relative wealth concerns, keeping up with the
@@ -90,10 +90,12 @@ $\theta_a$. We call $\theta_a$ \emph{net} risk aversion: it is the coefficient
 on a common translation of all wealths, and it is risk aversion net of the
 comparison. Raising $\lambda_a$ at fixed $\theta_a$ therefore raises own-wealth
 risk aversion too, and the comparative statics below are taken along that path.
-Second, market clearing here delivers a mean--covariance relation conditional on
-the covariance matrix, not a complete system of asset prices; the object we
-characterise is the effective market coefficient $\bth$, and we claim nothing
-about price levels.
+Second, the economy is closed: payoffs and quantities are the primitives,
+prices are endogenous, and Section~\ref{sec:returns} shows that equilibrium
+prices are explicit in the primitives and in a single scalar $\bth$ which is
+itself independent of prices. The market Sharpe ratio equals $\bth$ times a
+constant on the payoff side, so the object characterised below is a price of
+risk in the strict sense.
 
 The demand scales solve $[\D_{\theta+\lambda}-\D_{\lambda}A]\vec c=\mathbf 1$, a
 Katz--Bonacich system in the sense of \cite{ballester}, and the paper's
@@ -197,11 +199,21 @@ common.
 %=====================================================================
 \section{The economy}
 
-There are $m$ investors, one riskless asset with net return $r_f$, and $n$
-risky assets with excess returns $\vec y$ that are Gaussian with mean
-$\vec r_e$ and non-singular covariance $\Sigma$. Investor $a$ begins with
-wealth $W_a^0$ and chooses monetary positions $\vec\pi_a\in\mathbb{R}^n$, so
-that $W_a=W_a^0(1+r_f)+\vec\pi_a^{\top}\vec y$. Preferences are
+The primitives are payoffs and quantities, not return moments. There are two
+dates. At the second date $n$ risky assets pay $\vec X\in\mathbb{R}^n$, Gaussian
+with mean $\vec\mu$ and positive definite covariance $V$; they are in exogenous
+supply of $\vec\nu>0$ shares and trade at the first date at prices
+$\vec p\in\mathbb{R}^n$, to be determined. A riskless asset pays gross return
+$R_f>0$. There are $m$ investors; investor $a$ begins with wealth $W_a^0$ and
+chooses share holdings $\vec z_a\in\mathbb{R}^n$, placing the remainder in the
+riskless asset, so that
+%
+\begin{equation}
+W_a=R_f\big(W_a^0-\vec p^{\top}\vec z_a\big)+\vec X^{\top}\vec z_a .
+\label{eq:wealth}
+\end{equation}
+%
+Preferences are
 %
 \begin{equation}
 U_a=-\exp\Big[-\theta_a W_a-\lambda_a\Big(W_a-\sum_jA_{aj}W_j\Big)\Big],
@@ -267,10 +279,10 @@ Assumption~\ref{ass:norm} throughout and claim nothing about either case.
 
 \begin{assumption}[Nash behaviour]
 \label{ass:nash}
-Each investor chooses $\vec\pi_a$ taking the positions $\vec\pi_j$, $j\neq a$,
+Each investor chooses $\vec z_a$ taking the holdings $\vec z_j$, $j\neq a$,
 as fixed at their equilibrium values. An equilibrium is a profile
-$(\vec\pi_1,\dots,\vec\pi_m)$ and a vector $\vec r_e$ such that each
-$\vec\pi_a$ is optimal given the others and markets clear.
+$(\vec z_1,\dots,\vec z_m)$ and a price vector $\vec p$ such that each
+$\vec z_a$ is optimal given the others and markets clear.
 \end{assumption}
 
 Assumption~\ref{ass:nash} is the standard notion and we state it explicitly
@@ -279,27 +291,34 @@ behaving in this way conjectures that the positions of others do not respond to
 his own: the conjectural derivative is zero, and the conjectured levels are the
 equilibrium positions.
 
-\subsection*{First-order conditions}
+\subsection{First-order conditions and equilibrium prices}
 
-Under \eqref{eq:pref} the random part of the exponent is
-$-\big[(\theta_a+\lambda_a)\vec\pi_a-\lambda_a\sum_jA_{aj}\vec\pi_j\big]^{\top}\vec y$.
-Writing $\vec q_a$ for the bracket, Gaussian returns give
-$\E[U_a]=-C\exp\big(-\vec q_a^{\top}\vec r_e+\tfrac12\vec q_a^{\top}\Sigma\vec q_a\big)$,
-whose exponent is strictly convex in $\vec\pi_a$ because
-$\partial\vec q_a/\partial\vec\pi_a=(\theta_a+\lambda_a)\mathbb{I}$ is
-non-singular. The optimum is interior and solves $\vec q_a=\Sigma^{-1}\vec r_e$,
-that is
+Substituting \eqref{eq:wealth} into \eqref{eq:pref}, the random part of the
+exponent is $-\vec X^{\top}\vec q_a$ with
 %
 \begin{equation}
-(\theta_a+\lambda_a)\,\vec\pi_a-\lambda_a\sum_jA_{aj}\vec\pi_j
-=\Sigma^{-1}\vec r_e .
+\vec q_a=(\theta_a+\lambda_a)\vec z_a-\lambda_a\sum_jA_{aj}\vec z_j ,
+\label{eq:qa}
+\end{equation}
+%
+and the deterministic part is
+$-(\theta_a+\lambda_a)R_f(W_a^0-\vec p^{\top}\vec z_a)
++\lambda_a\sum_jA_{aj}R_f(W_j^0-\vec p^{\top}\vec z_j)$. Gaussian payoffs give
+$\E[U_a]=-\exp\big(d_a-\vec q_a^{\top}\vec\mu+\tfrac12\vec q_a^{\top}V\vec q_a\big)$
+with $d_a$ the deterministic part. Since
+$\partial\vec q_a/\partial\vec z_a=(\theta_a+\lambda_a)\mathbb{I}$, the exponent
+is a strictly convex quadratic in $\vec z_a$, with Hessian
+$(\theta_a+\lambda_a)^{2}V$. The optimum is therefore interior and solves
+%
+\begin{equation}
+V\vec q_a=\vec\mu-R_f\vec p .
 \label{eq:foc}
 \end{equation}
 %
-Every solution is proportional to $\Sigma^{-1}\vec r_e$, so all investors hold
-the same portfolio of risky assets and differ only in scale; two-fund
+Every solution is proportional to $V^{-1}(\vec\mu-R_f\vec p)$, so all investors
+hold the same portfolio of risky assets and differ only in scale; two-fund
 separation holds, as in Gómez's Proposition~1. Writing
-$\vec\pi_a=c_a\Sigma^{-1}\vec r_e$ reduces \eqref{eq:foc} to
+$\vec z_a=c_aV^{-1}(\vec\mu-R_f\vec p)$ reduces \eqref{eq:foc} to
 %
 \begin{equation}
 \big[\D_{\theta+\lambda}-\D_{\lambda}A\big]\,\vec c=\mathbf 1,
@@ -316,30 +335,103 @@ $\lambda_a\sum_jA_{aj}=\lambda_a<\theta_a+\lambda_a$, so it is strictly
 diagonally dominant with positive diagonal. A strictly diagonally dominant
 Z-matrix with positive diagonal is a non-singular M-matrix, hence $M^{-1}\geq0$
 entrywise \cite{bermanplemmons}; existence and uniqueness follow, and
-$\vec c=M^{-1}\mathbf 1>0$ because no row of $M^{-1}$ can vanish. Market
-clearing against a supply with value weights $\vec w\geq0$, $\sum_iw_i=1$, and
-aggregate wealth $W_M^0=\sum_aW_a^0$ measured in the same units as $W_a^0$, gives
+$\vec c=M^{-1}\mathbf 1>0$ because no row of $M^{-1}$ can vanish. Define
 %
 \begin{equation}
-\vec r_e=\theta_MW_M^0\Sigma\vec w,
-\qquad \frac{1}{\theta_M}=\sum_ac_a,
-\qquad \bth=m\,\theta_M .
+\frac{1}{\theta_M}=\sum_ac_a,
+\qquad \bth=m\,\theta_M ,
+\label{eq:thm}
+\end{equation}
+%
+and call $\bth$ the effective market coefficient. Market clearing
+$\sum_a\vec z_a=\vec\nu$ then gives $\vec\mu-R_f\vec p=\theta_MV\vec\nu$, that
+is
+%
+\begin{equation}
+\vec p=\frac{\vec\mu-\theta_M\,V\vec\nu}{R_f} .
+\label{eq:price}
+\end{equation}
+%
+Equation \eqref{eq:price} closes the model. Prices are explicit in the
+primitives $(\vec\mu,V,\vec\nu,R_f)$ and in the single scalar $\theta_M$, and no
+fixed point has to be solved, because $\theta_M$ is determined by
+\eqref{eq:system} and \eqref{eq:thm} from $(\vec\theta,\vec\lambda,A)$ alone and
+does not depend on prices. This is a property of CARA preferences with Gaussian
+payoffs, not an approximation: demands are independent of initial wealth, so
+the wealth distribution never feeds back. Prices are positive, and the
+equilibrium admissible, exactly when
+%
+\begin{equation}
+\vec\mu>\theta_M\,V\vec\nu
+\qquad\text{componentwise},
+\label{eq:positive}
+\end{equation}
+%
+which holds for every $\theta_M$ small enough and is the only parameter
+restriction the closure imposes. All the results below concern $\theta_M$, so
+they are statements about \eqref{eq:price}.
+
+\subsection{Returns and the price of risk}
+\label{sec:returns}
+
+Gross returns are $R_i=X_i/p_i$. Writing $\D_p=\mathrm{diag}(\vec p)$, the
+return covariance and the vector of expected excess returns are
+%
+\begin{equation}
+\Sigma=\D_p^{-1}V\D_p^{-1},
+\qquad
+\vec r_e=\D_p^{-1}\big(\vec\mu-R_f\vec p\big) ,
+\label{eq:returns}
+\end{equation}
+%
+both endogenous. Let $W_M=\vec p^{\top}\vec\nu$ be the market value of the risky
+assets and $\vec w=\D_p\vec\nu/W_M$ its vector of value weights. Substituting
+\eqref{eq:price} into \eqref{eq:returns} gives
+%
+\begin{equation}
+\vec r_e=\theta_M\,W_M\,\Sigma\vec w ,
 \label{eq:clear}
 \end{equation}
 %
-We call $\bth$ the effective market risk-aversion coefficient and reserve
-\emph{mean--covariance price-of-risk coefficient} for the product
-$W_M^0\theta_M=\bar W^0\bth$, which is the dimensionless object; $\bth$ alone
-carries units of inverse wealth and we do not call it a price.
+the mean--covariance relation, now with every object in it determined. The
+market portfolio has excess return $R_M-R_f$ with
+$\E[R_M]-R_f=\theta_M\vec\nu^{\top}V\vec\nu/W_M$ and
+$\mathrm{Var}(R_M)=\vec\nu^{\top}V\vec\nu/W_M^{2}$, so
+%
+\begin{equation}
+\frac{\E[R_M]-R_f}{\mathrm{Var}(R_M)}=\theta_MW_M ,
+\qquad
+S_M=\frac{\E[R_M]-R_f}{\mathrm{sd}(R_M)}
+=\frac{\bth}{m}\sqrt{\vec\nu^{\top}V\vec\nu} .
+\label{eq:sharpe}
+\end{equation}
+%
+The first is the market price of risk per unit of variance; the second is the
+Sharpe ratio, and it is $\bth$ multiplied by a constant that lives entirely on
+the payoff side. Every comparative static in $\bth$ below is therefore a
+comparative static in the price of risk, in the strict sense, and by
+\eqref{eq:price} a fall in $\bth$ raises every price whose row of $V\vec\nu$ is
+positive.
 
-\begin{remark}[What the model determines]
-Equations \eqref{eq:foc}--\eqref{eq:clear} determine a mean--covariance
-relation given $\Sigma$ and the supplies. They are not a complete system of
-asset prices: with payoffs and quantities as primitives a change in prices
-would move both the mean and the covariance of returns. Statements below
-concern demands and expected excess returns conditional on $\Sigma$, and
-nothing is claimed about price levels, market volatility or the invariance of
-betas.
+\begin{remark}[On the riskless rate]
+\label{rem:rf}
+Taking $R_f$ as given amounts to a riskless asset in perfectly elastic supply,
+and then $W_M=\vec p^{\top}\vec\nu$ is an endogenous market value that need not
+equal aggregate initial wealth. If instead the riskless asset is in zero net
+supply, the budget identities give $\sum_a(W_a^0-\vec p^{\top}\vec z_a)
+=\sum_aW_a^0-W_M$, so clearing that market requires
+$W_M=\sum_aW_a^0$ and determines
+%
+\begin{equation*}
+R_f=\frac{\vec\mu^{\top}\vec\nu-\theta_M\,\vec\nu^{\top}V\vec\nu}
+{\sum_aW_a^0} .
+\end{equation*}
+%
+Both closures leave \eqref{eq:price}--\eqref{eq:sharpe} intact, since neither
+touches $\theta_M$; they differ only in whether $W_M$ or $R_f$ is the free
+quantity. Under the second, the market value of the risky assets equals
+aggregate initial wealth, and comparison lowers the riskless rate whenever it
+lowers $\bth$.
 \end{remark}
 
 %=====================================================================
@@ -351,7 +443,7 @@ betas.
 Let Assumptions~\ref{ass:norm} and \ref{ass:nash} hold and suppose
 $\theta_a=\theta$ for every $a$, that is, $\alpha_a(1-\gamma_a)=\theta$. Then $\vec c=\theta^{-1}\mathbf 1$ is the
 unique solution of \eqref{eq:system}, so every investor holds
-$\vec\pi_a=\Sigma^{-1}\vec r_e/\theta$ and $\bth=\theta$, for every influence
+$\vec z_a=V^{-1}(\vec\mu-R_f\vec p)/\theta$ and $\bth=\theta$, for every influence
 matrix satisfying Assumption~\ref{ass:norm} and every profile
 $(\lambda_1,\dots,\lambda_m)$.
 \end{theorem}
@@ -377,7 +469,7 @@ benchmark is fixed in a unilateral deviation: under Assumption~\ref{ass:nash}
 the positions of others do not respond. Neutrality arises instead because at
 the equilibrium profile the benchmark carries the same risky exposure as the
 investor himself, so that
-$(\theta+\lambda_a)\vec\pi-\lambda_aA\vec\pi=(\theta+\lambda_a)\vec\pi-\lambda_a\vec\pi=\theta\vec\pi$.
+$(\theta+\lambda_a)\vec z-\lambda_aA\vec z=(\theta+\lambda_a)\vec z-\lambda_a\vec z=\theta\vec z$.
 The benchmark exposure offsets the additional $\lambda_a$ loading on own
 equilibrium wealth in the level of total risky exposure, not through any
 conjectured response to the deviation.
@@ -881,15 +973,18 @@ inertness of the aggregate under perfect homophily by type. What decides which
 case obtains is the correlation between net risk aversion and stationary
 influence.
 
-Two boundaries of the result should be kept in view. It concerns the effective
-market coefficient, not asset prices: the model delivers a mean--covariance
-relation conditional on the covariance matrix, and closing it into a full
-one-period economy with exogenous quantities and endogenous prices is the
-obvious next step. And $\theta_a$ is risk aversion net of the comparison, not
-the coefficient of absolute risk aversion in own wealth, so ``common risk
-aversion'' in Theorem~\ref{thm:neutral} means a common value of the product
-$\alpha_a(1-\gamma_a)$, along which stronger comparison motives come paired with
-greater own-wealth risk aversion.
+Because the economy is closed, these are statements about prices and not only
+about a conditional relation. Equilibrium prices are
+$\vec p=(\vec\mu-\theta_MV\vec\nu)/R_f$ and the market Sharpe ratio is
+$\bth\sqrt{\vec\nu^{\top}V\vec\nu}/m$, both explicit, because CARA demands carry
+no wealth effects and $\theta_M$ therefore does not depend on prices. A network
+that lowers $\bth$ raises every asset price and compresses every risk premium.
+
+One boundary should be kept in view. Here $\theta_a$ is risk aversion net of the
+comparison, not the coefficient of absolute risk aversion in own wealth, so
+``common risk aversion'' in Theorem~\ref{thm:neutral} means a common value of
+the product $\alpha_a(1-\gamma_a)$, along which stronger comparison motives come
+paired with greater own-wealth risk aversion.
 
 The practical reading is that a representative-agent treatment of relative
 concerns reproduces the mean-field case and is safe only where influence is
@@ -920,7 +1015,11 @@ seeds; \texttt{scripts/block\_reversal.py} produces the block replication and
 the mixing robustness of Remark~\ref{rem:blocks}; and
 \texttt{scripts/characterization.py} checks Theorems~\ref{thm:deriv} and
 \ref{thm:intense}, the Dirichlet identity \eqref{eq:dirichlet}, the bound of
-Lemma~\ref{lem:bound} and each of the three cases of \eqref{eq:intense}. The scripts depend only on
+Lemma~\ref{lem:bound} and each of the three cases of \eqref{eq:intense}; and
+\texttt{scripts/closed\_economy.py} checks the first-order conditions
+\eqref{eq:foc} against direct numerical optimisation, market clearing, the price
+formula \eqref{eq:price}, the recovery of \eqref{eq:clear} and the Sharpe
+identity \eqref{eq:sharpe}. The scripts depend only on
 \texttt{numpy} and \texttt{scipy}, read no data and draw from fixed seeds;
 \texttt{./reproduce.sh} runs all four in about fifteen seconds.
 
