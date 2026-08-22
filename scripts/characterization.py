@@ -89,6 +89,49 @@ def row_stochastic(m, rng):
     return A / A.sum(1, keepdims=True)
 
 
+def mixing_diagnostics(m, sigma, lam, rng):
+    """Primitive condition (19) versus the endogenous mixing condition.
+
+    The dense i.i.d.-weight ensemble of the supplement does NOT satisfy (19):
+    with A_aj = U_aj / sum_k U_ak and U uniform, the law of large numbers gives
+    sum_k U_ak ~ m/2, so ||A_a. - 1/m||_1 -> E|2U-1| = 1/2, not 0. The endogenous
+    condition max_a |sum_j A_aj c_j - cbar| -> 0 nevertheless holds, because the
+    weights are drawn independently of the types and the average is a law of
+    large numbers rather than a statement about rows becoming uniform.
+    """
+    A = row_stochastic(m, rng)
+    th = np.clip(1.0 + sigma * rng.normal(size=m), 0.15, None)
+    t = 1.0 / th
+    c = np.linalg.solve(np.diag(th) + lam * (np.eye(m) - A), np.ones(m))
+    return dict(delta_m=uniform_row_distance(A),
+                endogenous=np.abs(A @ c - c.mean()).max(),
+                dtheta=dtheta_bar_at_zero(A, th),
+                cv2=t.var() / t.mean() ** 2)
+
+
+def _mixing_report():
+    rng = np.random.default_rng(0)
+    print("\n(8) the dense i.i.d. ensemble fails (19) but mixes anyway")
+    print(f"    {'m':>6}{'delta_m':>11}{'endogenous':>13}"
+          f"{'theta_bar(0)':>15}{'CV^2(t)':>11}")
+    for m in [10, 50, 200, 1000, 4000]:
+        d = mixing_diagnostics(m, 0.4, 0.5, rng)
+        print(f"    {m:>6}{d['delta_m']:>11.6f}{d['endogenous']:>13.6f}"
+              f"{d['dtheta']:>15.6f}{d['cv2']:>11.6f}")
+    print("    -> delta_m tends to 1/2, so condition (19) fails; the endogenous")
+    print("       deviation tends to zero and theta_bar'(0) tends to CV^2(t).")
+    m = 4000
+    A = row_stochastic(m, rng)
+    th = np.clip(1.0 + 0.4 * rng.normal(size=m), 0.15, None)
+    t = 1.0 / th
+    Adep = row_stochastic(m, rng) * t[None, :] ** 3
+    Adep /= Adep.sum(1, keepdims=True)
+    print(f"    independence is what does it. At m={m}, weights independent of")
+    print(f"    types give max_a |sum_j A_aj t_j - tbar| = "
+          f"{np.abs(A @ t - t.mean()).max():.6f}, while weights proportional")
+    print(f"    to t_j^3 give {np.abs(Adep @ t - t.mean()).max():.6f}.")
+
+
 if __name__ == "__main__":
     rng = np.random.default_rng(0)
 
@@ -194,3 +237,5 @@ if __name__ == "__main__":
     for m in [10, 100, 1000]:
         A = (np.ones((m, m)) - np.eye(m)) / (m - 1)
         print(f"    {m:>6}{uniform_row_distance(A):>26.8f}{2 / m:>12.8f}")
+
+    _mixing_report()

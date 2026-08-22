@@ -75,10 +75,18 @@ run under considerably older versions.
 
 ## Paper
 
-`paper/heterogeneous.tex` and `paper/heterogeneous.pdf` are the author's
-manuscript version. `paper/supplement.tex` and `paper/supplement.pdf` hold the
-Monte Carlo design and the table of reversal frequencies, which
-`scripts/sign_reversal.py` reproduces.
+The author's manuscript version, in three builds from one source:
+
+| File | Contents |
+|---|---|
+| `paper/heterogeneous.pdf` | the paper alone, 16 pages |
+| `paper/supplement.pdf` | the supplement alone, 3 pages |
+| `paper/submission.pdf` | both in one PDF, 19 pages |
+
+The bodies live in `paper/body-paper.tex` and `paper/body-supplement.tex`; the
+three `.tex` files at top level are thin shells around them. The supplement's
+references to the paper go through a `\paperref` macro that prints literal text
+in the standalone build and a real `\ref` in the combined one.
 
 ## License
 

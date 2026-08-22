@@ -1,0 +1,1066 @@
+\begin{abstract}
+In a one-period CARA economy with Gaussian payoffs, exogenous quantities and
+endogenous prices, each investor compares his wealth to a weighted average over
+a network of peers. Equilibrium demand scales solve a Katz--Bonacich system, and
+prices are explicit in one scalar, the effective market coefficient, which is
+itself independent of prices; the market Sharpe ratio is proportional to it. Two
+limits, available for every network, organise how the network aggregates risk
+aversion. At zero comparison intensity the marginal effect is a quadratic form
+in risk tolerances, and a doubly stochastic influence matrix --- balanced
+attention --- makes it a Dirichlet form, hence non-negative for every profile of
+tolerances. Under intense comparison the coefficient converges to a stationary
+average of individual coefficients, weighted by influence rather than by
+population. It then falls below its no-comparison value, taking the Sharpe ratio
+with it, whenever stationary influence sufficiently favours the less risk
+averse; it interpolates from the harmonic to the arithmetic mean when influence
+is spread evenly; and it does not move at all when the network splits into
+blocks homogeneous in type. A
+separate result is that comparison is exactly neutral, for every network and
+every profile of intensities, when net risk aversion is common.
+\end{abstract}
+
+\noindent\textbf{Keywords:} relative wealth concerns, keeping up with the
+Joneses, CARA aggregation, Katz--Bonacich centrality, homophily.
+
+\medskip
+\noindent\textbf{JEL:} G11, G12, D53, D85.
+
+%=====================================================================
+\section{Introduction}
+
+\cite{gomez} studies an exchange economy in which agents evaluate consumption
+relative to a weighted average of the consumption of others, and asks when
+equilibrium prices depend only on aggregates. His Proposition~1 shows that
+linear risk tolerance with common cautiousness delivers a representative agent
+and rules out portfolio bias; his Proposition~2 gives the conditions under
+which prices depend on the aggregate endowment alone, and finds them
+restrictive: the preference parameters must be common across agents and, absent
+the trivial case of uniform weights, so must the equilibrium value of the
+endowment. Under those conditions the CARA case reduces cleanly, and keeping up
+with the Joneses is equivalent to lowering the representative agent's risk
+aversion from $\alpha$ to $\alpha(1-\gamma)$.
+
+What happens outside those conditions is the natural question, and \cite{gomez}
+leaves it open. He notes that in their absence equilibrium prices may be
+affected by the distribution of weights in the definition of the Joneses, by the
+preference parameters, and by the endowment distribution --- three channels that
+a representative-agent reduction cannot express. This paper opens the first of
+them, in the CARA case, by letting the benchmark be agent-specific: investor $a$
+compares himself to $\sum_jA_{aj}W_j$, a weighted average over a network of
+influence rather than a single economy-wide aggregate. The question is then not
+whether the comparison matters but \emph{what feature of the network} decides
+how it matters.
+
+Two remarks on what is being held fixed, since they govern the reading of
+everything below. First, with preferences
+$-\exp[-\theta_aW_a-\lambda_a(W_a-\sum_jA_{aj}W_j)]$, the coefficient of
+absolute risk aversion in own wealth is $\alpha_a=\theta_a+\lambda_a$, not
+$\theta_a$. We call $\theta_a$ \emph{net} risk aversion: it is the coefficient
+on a common translation of all wealths, and it is risk aversion net of the
+comparison. Raising $\lambda_a$ at fixed $\theta_a$ therefore raises own-wealth
+risk aversion too, and the comparative statics below are taken along that path.
+Second, the economy is closed: payoffs and quantities are the primitives,
+prices are endogenous, and Section~\ref{sec:returns} shows that equilibrium
+prices are explicit in the primitives and in a single scalar $\bth$ which is
+itself independent of prices. The market Sharpe ratio equals $\bth$ times a
+constant on the payoff side, so the object characterised below is a price of
+risk in the strict sense.
+
+The demand scales solve $[\D_{\theta+\lambda}-\D_{\lambda}A]\vec c=\mathbf 1$, a
+Katz--Bonacich system in the sense of \cite{ballester}, and the paper's
+contribution is to characterise how that system aggregates. Two limits, both
+available for every network, do the work.
+
+At the origin, the marginal effect of comparison is the quadratic form
+$\bth'(0)=m\,\vec t^{\top}(\mathbb{I}-A)\vec t/(\mathbf 1^{\top}\vec t)^{2}$ in
+the vector $\vec t$ of risk tolerances (Theorem~\ref{thm:deriv}). If attention
+is balanced --- $A$ doubly stochastic, so that each investor receives as much
+attention as he gives, and not necessarily symmetric --- this is a Dirichlet
+form, $\tfrac12\sum_{a,j}A_{aj}(t_a-t_j)^{2}$, hence non-negative and zero only
+if tolerance is constant along every link. Comparison raises the effective
+coefficient exactly to the extent that investors look at people unlike
+themselves.
+
+At the other end, as comparison becomes intense, $\bth$ converges to a
+\emph{stationary} average of individual coefficients: $\vec\pi^{\top}\vec\theta$
+when the influence matrix has a single recurrent class, and a harmonic
+combination across classes in general (Theorem~\ref{thm:intense}). Influence,
+not population, does the weighting in the limit, and since the no-comparison
+value is the harmonic mean $H(\theta)$, a sufficient condition for comparison to
+\emph{lower} the effective coefficient is $\vec\pi^{\top}\vec\theta<H(\theta)$.
+
+These two limits organise what would otherwise be a list. The mean-field
+regime is the case in which the stationary distribution is uniform, so the
+limit is $\E[\theta]$ and comparison interpolates from the harmonic to the
+arithmetic mean (Proposition~\ref{prop:mf}). Sign reversal is the case in which
+stationary influence favours the less risk averse; in the three-investor example
+of Proposition~\ref{prop:reversal} the most risk averse investor is watched by
+nobody, receives stationary weight zero, and the limit falls to $3/4$ against a
+starting value of $6/7$. Perfect homophily is the case of several recurrent
+classes each homogeneous in type, where the stationary average reproduces the
+harmonic mean and the two limits coincide, so the aggregate never moves at all
+(Proposition~\ref{prop:homophily}).
+
+A separate and much simpler result delimits where any of this can happen. If net
+risk aversion is common, the comparison is exactly neutral: every investor holds
+the position he would hold with no relative concern, for every row-stochastic
+$A$ and every profile $\lambda_a$ (Theorem~\ref{thm:neutral}). No statistic of
+the network survives into equilibrium. This is the network extension of Gómez's
+CARA case, and it says that dispersion of net risk aversion is the necessary
+fuel for everything else.
+
+The message is that the comparison channel in this class of models is a property
+neither of preferences alone nor of the network alone, but of the alignment
+between them --- specifically, of the correlation between net risk aversion and
+stationary influence. A representative-agent treatment delivers the mean-field
+case, and can therefore be wrong in sign, not merely in magnitude, whenever
+attention is unbalanced.
+
+%=====================================================================
+\section{Related literature}
+
+Preferences over relative consumption or wealth have been used to address a
+range of asset-pricing questions. \cite{abel} and \cite{gali} build
+consumption-based models with external benchmarks and obtain an amplified
+equity premium; \cite{campbell} show how an external habit generates
+time-varying effective risk aversion; \cite{chankogan} make the wealth
+distribution a state variable under heterogeneous CRRA preferences, which is
+the dynamic counterpart of the configuration studied here. \cite{dupor}
+provide the taxonomy under which \eqref{eq:pref} is jealousy combined with
+keeping up with the Joneses.
+
+Within the CARA class, \cite{degennaro} is the closest antecedent and the
+comparison locates what is new here. They study two agents with multiple risky
+assets and distributions in a natural exponential family, and show that relative
+concerns act through a transformation of effective risk tolerances, lowering
+equilibrium premia. The mechanism they identify is a change in the tolerance
+\emph{levels}. With two agents the benchmark of each is the other, so there is
+no network to speak of: the influence matrix is forced to
+$A=\big(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\big)$, which is doubly
+stochastic, and by Theorem~\ref{thm:deriv} the marginal effect is then
+necessarily non-negative. The questions of this paper --- whether attention is
+balanced, which investors stationary influence favours, whether types and
+positions are correlated --- cannot be posed at $m=2$, and the results that turn
+on them (Theorems~\ref{thm:deriv} and \ref{thm:intense}, and the reversal and
+homophily that follow) have no two-agent counterpart. What is added is therefore
+not a dimension count but the object doing the aggregating: a stationary
+distribution in place of a pair of tolerances. \cite{demarzo04} obtain portfolio bias when
+the benchmark differs in composition from the investor's own holdings, a
+channel excluded here by the scalar structure of \eqref{eq:foc}.
+\cite{lacker} solve relative-performance games for CARA and CRRA investors in
+mean-field and $n$-agent form; their concern is the existence and structure of
+Nash equilibria rather than whether the aggregate moves, and their mean-field
+formulation is the analogue of our Proposition~\ref{prop:mf} in a different
+setting. \cite{kraft} take the problem to incomplete markets in continuous
+time. \cite{panageas} surveys what heterogeneity and inequality imply for asset
+prices more broadly.
+
+Two connections deserve care. \cite{gollier} gives the criterion governing the
+effect of endowment inequality on the equity premium, namely concavity of risk
+tolerance in wealth. Our \eqref{eq:cv2} is an analogue for dispersion in a
+preference parameter rather than in endowments, and should be read as such
+rather than as an application of his theorem. And \cite{ballester} give the
+linear-quadratic network game whose solution \eqref{eq:system} reproduces; what
+the present setting adds is that the centrality vector becomes constant, and
+every statistic of the network drops out, precisely when net risk aversion is
+common.
+
+%=====================================================================
+\section{The economy}
+
+The primitives are payoffs and quantities, not return moments. There are two
+dates. At the second date $n$ risky assets pay $\vec X\in\mathbb{R}^n$, Gaussian
+with mean $\vec\mu$ and positive definite covariance $V$; they are in exogenous
+supply of $\vec\nu>0$ shares and trade at the first date at prices
+$\vec p\in\mathbb{R}^n$, to be determined. A riskless asset pays gross return
+$R_f>0$. There are $m$ investors; investor $a$ begins with wealth $W_a^0$ and
+chooses share holdings $\vec z_a\in\mathbb{R}^n$, placing the remainder in the
+riskless asset, so that
+%
+\begin{equation}
+W_a=R_f\big(W_a^0-\vec p^{\top}\vec z_a\big)+\vec X^{\top}\vec z_a .
+\label{eq:wealth}
+\end{equation}
+%
+Preferences are
+%
+\begin{equation}
+U_a=-\exp\Big[-\theta_a W_a-\lambda_a\Big(W_a-\sum_jA_{aj}W_j\Big)\Big],
+\qquad \theta_a>0,\ \lambda_a\geq0 .
+\label{eq:pref}
+\end{equation}
+
+\begin{assumption}[Normalised benchmark]
+\label{ass:norm}
+$m\geq2$; $A_{aa}=0$, $A_{aj}\geq0$ and $\sum_jA_{aj}=1$ for every $a$.
+\end{assumption}
+
+\begin{definition}[Two coefficients]
+\label{def:two}
+Holding the wealth of others fixed, the coefficient of absolute risk aversion
+of \eqref{eq:pref} in own wealth is
+%
+\begin{equation}
+\alpha_a=\theta_a+\lambda_a ,
+\label{eq:alpha}
+\end{equation}
+%
+which we call \emph{own-wealth risk aversion}. We call $\theta_a$ the
+\emph{net risk-aversion coefficient}: under Assumption~\ref{ass:norm} it is the
+coefficient on a common translation of all wealths, since adding a constant to
+every $W_j$ shifts the exponent of \eqref{eq:pref} by $-\theta_a$ times that
+constant, independently of $\lambda_a$. It is risk aversion net of the
+comparison.
+\end{definition}
+
+The distinction matters for reading everything below, and we state it before
+any result because the two coefficients cannot both be held fixed. Raising
+$\lambda_a$ at constant $\theta_a$ is not a pure increase in the intensity of
+comparison: by \eqref{eq:alpha} it raises own-wealth risk aversion by the same
+amount. Every comparative static in $\lambda$ in this paper is taken along that
+path, at constant $\theta$, and the neutrality of Section~\ref{sec:neutral} is
+exactly the cancellation of the two effects. The alternative path, at constant
+$\alpha$, is described in Remark~\ref{rem:param}.
+
+The multiplicative parametrization of \cite{gomez} makes the same point in his
+notation. Collecting terms in the exponent of \eqref{eq:pref},
+%
+\begin{equation}
+-\theta_aW_a-\lambda_a\Big(W_a-\sum_jA_{aj}W_j\Big)
+=-\alpha_a\Big(W_a-\gamma_a\sum_jA_{aj}W_j\Big),
+\qquad \gamma_a=\frac{\lambda_a}{\theta_a+\lambda_a}\in[0,1),
+\label{eq:param}
+\end{equation}
+%
+so that $\theta_a=\alpha_a(1-\gamma_a)$. He writes the CARA case as
+$u(c,X)=-\exp(-\alpha(c-\gamma X))$ and reduces it to a representative agent
+with coefficient $\alpha(1-\gamma)$, which is exactly $\theta$.
+
+The benchmark is thus a weighted average of the wealth of the other investors,
+as in \cite{gomez}, with the difference that the weights may vary across
+investors. Assumption~\ref{ass:norm} is what gives $\theta_a$ the reading in
+Definition~\ref{def:two}, and it is what the results below require. Dropping it changes the object
+being compared: row sums below one describe comparison with a partial or
+external benchmark, which is a coherent alternative we do not study, while row
+sums above $1+\theta_a/\lambda_a$ make an investor worse off when the whole
+economy becomes richer, which is harder to motivate. We retain
+Assumption~\ref{ass:norm} throughout and claim nothing about either case.
+
+\begin{assumption}[Nash behaviour]
+\label{ass:nash}
+Each investor chooses $\vec z_a$ taking the holdings $\vec z_j$, $j\neq a$,
+as fixed at their equilibrium values. An equilibrium is a profile
+$(\vec z_1,\dots,\vec z_m)$ and a price vector $\vec p$ such that each
+$\vec z_a$ is optimal given the others and markets clear.
+\end{assumption}
+
+Assumption~\ref{ass:nash} is the standard notion and we state it explicitly
+because the conjecture it embodies matters for what follows. An investor
+behaving in this way conjectures that the positions of others do not respond to
+his own: the conjectural derivative is zero, and the conjectured levels are the
+equilibrium positions.
+
+\subsection{First-order conditions and equilibrium prices}
+
+Substituting \eqref{eq:wealth} into \eqref{eq:pref}, the random part of the
+exponent is $-\vec X^{\top}\vec q_a$ with
+%
+\begin{equation}
+\vec q_a=(\theta_a+\lambda_a)\vec z_a-\lambda_a\sum_jA_{aj}\vec z_j ,
+\label{eq:qa}
+\end{equation}
+%
+and the deterministic part is
+$-(\theta_a+\lambda_a)R_f(W_a^0-\vec p^{\top}\vec z_a)
++\lambda_a\sum_jA_{aj}R_f(W_j^0-\vec p^{\top}\vec z_j)$. Gaussian payoffs give
+$\E[U_a]=-\exp\big(d_a-\vec q_a^{\top}\vec\mu+\tfrac12\vec q_a^{\top}V\vec q_a\big)$
+with $d_a$ the deterministic part. Since
+$\partial\vec q_a/\partial\vec z_a=(\theta_a+\lambda_a)\mathbb{I}$, the exponent
+is a strictly convex quadratic in $\vec z_a$, with Hessian
+$(\theta_a+\lambda_a)^{2}V$. The optimum is therefore interior and solves
+%
+\begin{equation}
+V\vec q_a=\vec\mu-R_f\vec p .
+\label{eq:foc}
+\end{equation}
+%
+Every solution is proportional to $V^{-1}(\vec\mu-R_f\vec p)$, so all investors
+hold the same portfolio of risky assets and differ only in scale; two-fund
+separation holds, as in Gómez's Proposition~1. Writing
+$\vec z_a=c_aV^{-1}(\vec\mu-R_f\vec p)$ reduces \eqref{eq:foc} to
+%
+\begin{equation}
+\big[\D_{\theta+\lambda}-\D_{\lambda}A\big]\,\vec c=\mathbf 1,
+\qquad \D_x=\mathrm{diag}(x_1,\dots,x_m),
+\label{eq:system}
+\end{equation}
+%
+whose solution is a Katz--Bonacich centrality of the influence network
+\cite{ballester}, generalised in that the attenuation factors $\lambda_a$ and
+the base vector are agent-specific rather than scalar. Write
+$M=\D_{\theta+\lambda}-\D_{\lambda}A$. Its off-diagonal entries are
+non-positive, so $M$ is a Z-matrix, and its off-diagonal row sums are
+$\lambda_a\sum_jA_{aj}=\lambda_a<\theta_a+\lambda_a$, so it is strictly
+diagonally dominant with positive diagonal. A strictly diagonally dominant
+Z-matrix with positive diagonal is a non-singular M-matrix, hence $M^{-1}\geq0$
+entrywise \cite{bermanplemmons}; existence and uniqueness follow, and
+$\vec c=M^{-1}\mathbf 1>0$ because no row of $M^{-1}$ can vanish. Define
+%
+\begin{equation}
+\frac{1}{\theta_M}=\sum_ac_a,
+\qquad \bth=m\,\theta_M ,
+\label{eq:thm}
+\end{equation}
+%
+and call $\bth$ the effective market coefficient. Market clearing
+$\sum_a\vec z_a=\vec\nu$ then gives $\vec\mu-R_f\vec p=\theta_MV\vec\nu$, that
+is
+%
+\begin{equation}
+\vec p=\frac{\vec\mu-\theta_M\,V\vec\nu}{R_f} .
+\label{eq:price}
+\end{equation}
+%
+Equation \eqref{eq:price} closes the model. Prices are explicit in the
+primitives $(\vec\mu,V,\vec\nu,R_f)$ and in the single scalar $\theta_M$, and no
+fixed point has to be solved, because $\theta_M$ is determined by
+\eqref{eq:system} and \eqref{eq:thm} from $(\vec\theta,\vec\lambda,A)$ alone and
+does not depend on prices. This is a property of CARA preferences with Gaussian
+payoffs, not an approximation: demands are independent of initial wealth, so
+the wealth distribution never feeds back. Prices are positive, and the
+equilibrium admissible, exactly when
+%
+\begin{equation}
+\vec\mu>\theta_M\,V\vec\nu
+\qquad\text{componentwise},
+\label{eq:positive}
+\end{equation}
+%
+which is the only parameter restriction the closure imposes; parameters
+satisfying it are called admissible. If in addition $\vec\mu\gg0$, every
+sufficiently small $\theta_M$ is admissible. All the results below concern $\theta_M$, so
+they are statements about \eqref{eq:price}.
+
+\subsection{Returns and the price of risk}
+\label{sec:returns}
+
+Gross returns are $R_i=X_i/p_i$. Writing $\D_p=\mathrm{diag}(\vec p)$, the
+return covariance and the vector of expected excess returns are
+%
+\begin{equation}
+\Sigma=\D_p^{-1}V\D_p^{-1},
+\qquad
+\vec r_e=\D_p^{-1}\big(\vec\mu-R_f\vec p\big) ,
+\label{eq:returns}
+\end{equation}
+%
+both endogenous. Let $W_M=\vec p^{\top}\vec\nu$ be the market value of the risky
+assets and $\vec w=\D_p\vec\nu/W_M$ its vector of value weights. Substituting
+\eqref{eq:price} into \eqref{eq:returns} gives
+%
+\begin{equation}
+\vec r_e=\theta_M\,W_M\,\Sigma\vec w ,
+\label{eq:clear}
+\end{equation}
+%
+the mean--covariance relation, now with every object in it determined. The
+market portfolio has excess return $R_M-R_f$ with
+$\E[R_M]-R_f=\theta_M\vec\nu^{\top}V\vec\nu/W_M$ and
+$\mathrm{Var}(R_M)=\vec\nu^{\top}V\vec\nu/W_M^{2}$, so
+%
+\begin{equation}
+\frac{\E[R_M]-R_f}{\mathrm{Var}(R_M)}=\theta_MW_M ,
+\qquad
+S_M=\frac{\E[R_M]-R_f}{\mathrm{sd}(R_M)}
+=\frac{\bth}{m}\sqrt{\vec\nu^{\top}V\vec\nu} .
+\label{eq:sharpe}
+\end{equation}
+%
+The first is the market price of risk per unit of variance; the second is the
+Sharpe ratio, and it is $\bth$ multiplied by a constant that lives entirely on
+the payoff side. Every comparative static in $\bth$ below is therefore a
+comparative static in the price of risk, in the strict sense. The
+unconditional statements are the aggregate ones: a fall in $\bth$ lowers the
+market Sharpe ratio and the market risk premium. Statements about individual
+prices are conditional, since
+$\partial p_i/\partial\theta_M=-(V\vec\nu)_i/R_f$, so that a fall in $\bth$
+raises $p_i$ exactly when $(V\vec\nu)_i>0$ --- when asset $i$ covaries
+positively with the market payoff. Assets that hedge the market move the other
+way.
+
+\begin{remark}[On the riskless rate]
+\label{rem:rf}
+Taking $R_f$ as given amounts to a riskless asset in perfectly elastic supply,
+and then $W_M=\vec p^{\top}\vec\nu$ is an endogenous market value that need not
+equal aggregate initial wealth. If instead the riskless asset is in zero net
+supply, the budget identities give $\sum_a(W_a^0-\vec p^{\top}\vec z_a)
+=\sum_aW_a^0-W_M$, so clearing that market requires
+$W_M=\sum_aW_a^0$ and determines
+%
+\begin{equation*}
+R_f=\frac{\vec\mu^{\top}\vec\nu-\theta_M\,\vec\nu^{\top}V\vec\nu}
+{\sum_aW_a^0} .
+\end{equation*}
+%
+Both closures leave \eqref{eq:price}--\eqref{eq:sharpe} intact, since neither
+touches $\theta_M$; they differ only in whether $W_M$ or $R_f$ is the free
+quantity. Under the second, the market value of the risky assets equals
+aggregate initial wealth, and since
+$\partial R_f/\partial\theta_M=-\vec\nu^{\top}V\vec\nu/\sum_aW_a^0<0$,
+comparison \emph{raises} the riskless rate whenever it lowers $\bth$. That
+closure also fixes $\vec\nu^{\top}\vec p=\sum_aW_a^0$, so prices cannot all move
+in the same direction: a fall in $\bth$ redistributes value across assets
+instead of raising the aggregate.
+\end{remark}
+
+%=====================================================================
+\section{Neutrality under common net risk aversion}
+\label{sec:neutral}
+
+\begin{theorem}
+\label{thm:neutral}
+Let Assumptions~\ref{ass:norm} and \ref{ass:nash} hold and suppose
+$\theta_a=\theta$ for every $a$, that is, $\alpha_a(1-\gamma_a)=\theta$. Then $\vec c=\theta^{-1}\mathbf 1$ is the
+unique solution of \eqref{eq:system}, so every investor holds
+$\vec z_a=V^{-1}(\vec\mu-R_f\vec p)/\theta$ and $\bth=\theta$, for every influence
+matrix satisfying Assumption~\ref{ass:norm} and every profile
+$(\lambda_1,\dots,\lambda_m)$.
+\end{theorem}
+
+\begin{proof}
+Substituting $\vec c=\theta^{-1}\mathbf 1$ in row $a$ of \eqref{eq:system} and
+using $\sum_jA_{aj}=1$ gives
+$(\theta+\lambda_a)/\theta-\lambda_a/\theta=1$. Uniqueness follows from strict
+diagonal dominance, as above.
+\end{proof}
+
+The hypothesis is that the product $\alpha_a(1-\gamma_a)$ be common, so
+neutrality holds on the whole level set
+$\{(\alpha,\gamma):\alpha(1-\gamma)=\theta\}$. Along that set an investor with a
+stronger comparison motive is also more risk averse in own wealth, in exactly
+the proportion that cancels. That is the content of the theorem, and it is
+weaker than it sounds if $\theta_a$ is read as the conventional coefficient of
+absolute risk aversion, which by Definition~\ref{def:two} it is not.
+
+The cancellation occurs row by row, before any aggregation, which is why
+nothing about $A$ or about the dispersion of $\lambda_a$ enters. Economically, the
+benchmark is fixed in a unilateral deviation: under Assumption~\ref{ass:nash}
+the positions of others do not respond. Neutrality arises instead because at
+the equilibrium profile the benchmark carries the same risky exposure as the
+investor himself, so that
+$(\theta+\lambda_a)\vec z-\lambda_aA\vec z=(\theta+\lambda_a)\vec z-\lambda_a\vec z=\theta\vec z$.
+The benchmark exposure offsets the additional $\lambda_a$ loading on own
+equilibrium wealth in the level of total risky exposure, not through any
+conjectured response to the deviation.
+
+Theorem~\ref{thm:neutral} is the network extension of the CARA case of
+\cite{gomez}, and we claim no more for it than that. His Proposition~2
+identifies common cautiousness --- here, common $\theta$ --- as what makes the
+weighting drop out; the addition is that the weighting may be agent-specific
+and the comparison intensities may differ, and neither disturbs the conclusion.
+
+\begin{remark}[Comparison at constant own-wealth risk aversion]
+\label{rem:param}
+Theorem~\ref{thm:neutral} varies $\lambda_a$ holding $\theta$ fixed. The other
+natural path holds $\alpha$ fixed and varies $\gamma_a$, so that
+$\theta_a=\alpha(1-\gamma_a)$ is dispersed whenever $\gamma_a$ is. Neutrality
+then fails, but not through a new mechanism: the demand scales solve
+\eqref{eq:system} with $\theta_a=\alpha(1-\gamma_a)$ and
+$\lambda_a=\alpha\gamma_a$, and dispersion of the keeping-up weight is
+dispersion of net risk aversion. The two paths are therefore two coordinates of
+one statement. What neutrality requires is that $\alpha_a(1-\gamma_a)$ be
+common; what breaks it is dispersion in that product, however generated.
+
+Gómez's Proposition~2 requires more, in a second way. It asks that the
+preference parameters be identical across agents and, barring uniform weights,
+that the equilibrium value of the endowment be identical as well. Initial
+wealth is absent from \eqref{eq:foc} altogether, since CARA demands have no
+wealth effects, so no restriction on the endowment distribution is needed here.
+\end{remark}
+
+\begin{remark}[Two notions of neutrality]
+\label{rem:two}
+Theorem~\ref{thm:neutral} asserts that individual positions are unchanged,
+which is stronger than saying the effective coefficient is unchanged. The latter
+requires only that $\sum_ac_a$ be unchanged, and deviations can offset. The
+distinction is not hypothetical: it occurs inside the example of
+Proposition~\ref{prop:reversal}, whose $\bth(\lambda)$ returns to its
+no-comparison value at $\lambda=\tfrac13$. There
+%
+\begin{equation*}
+\vec c(0)=\big(2,\;1,\;\tfrac12\big),
+\qquad
+\vec c(\tfrac13)=\big(\tfrac53,\;\tfrac76,\;\tfrac23\big),
+\qquad
+\bth(0)=\bth(\tfrac13)=\tfrac67 ,
+\end{equation*}
+%
+so the aggregate is exactly neutral while individual positions move by
+$-16.7$, $+16.7$ and $+33.3$ per cent. Results below concern $\bth$, so the
+weaker notion is the relevant one, and statements about it should not be read
+as statements about allocations.
+\end{remark}
+
+%=====================================================================
+\section{Heterogeneous net risk aversion}
+\label{sec:hetero}
+
+We now let $\theta_a$ vary, which is exactly the configuration in which the
+aggregation conditions of \cite{gomez} fail. The system \eqref{eq:system} still
+has a unique positive solution, but it is no longer proportional to
+$\mathbf 1$, and $\bth$ depends on $\lambda$ and on $A$.
+
+Throughout this section $\lambda_a=\lambda$ is common, so that
+$\lambda$ indexes a one-parameter family of economies running from no
+comparison to complete comparison. Two limits of that family can be computed in
+closed form for \emph{every} network, and between them they organise everything
+that follows. Write
+%
+\begin{equation}
+\vec t=\D_{\theta}^{-1}\mathbf 1,
+\qquad t_a=1/\theta_a ,
+\label{eq:tol}
+\end{equation}
+%
+for the vector of risk tolerances, so that $\vec c(0)=\vec t$ and
+$\bth(0)=H(\theta)$ is the harmonic mean of net risk aversion.
+
+\subsection{The marginal effect of comparison}
+\label{sec:marginal}
+
+\begin{theorem}
+\label{thm:deriv}
+Let Assumption~\ref{ass:norm} hold and $\lambda_a=\lambda$. Then
+%
+\begin{equation}
+\bth'(0)=\frac{m\,\vec t^{\top}(\mathbb{I}-A)\vec t}
+{\big(\mathbf 1^{\top}\vec t\big)^{2}} .
+\label{eq:deriv0}
+\end{equation}
+%
+If in addition $A$ is doubly stochastic --- not necessarily symmetric --- then
+%
+\begin{equation}
+\vec t^{\top}(\mathbb{I}-A)\vec t
+=\tfrac12\sum_{a,j}A_{aj}\big(t_a-t_j\big)^{2}\;\geq\;0 ,
+\label{eq:dirichlet}
+\end{equation}
+%
+so $\bth'(0)\geq0$, with equality if and only if $t_a=t_j$ whenever $A_{aj}>0$.
+For $A$ merely row stochastic the sign of \eqref{eq:deriv0} is unrestricted.
+\end{theorem}
+
+\begin{proof}
+Write $M(\lambda)=\D_{\theta}+\lambda(\mathbb{I}-A)$, so that
+$\vec c=M^{-1}\mathbf 1$ and
+$\vec c\,'=-M^{-1}(\mathbb{I}-A)\vec c$. At $\lambda=0$ we have
+$M(0)=\D_{\theta}$ and $\vec c(0)=\vec t$, hence
+$\mathbf 1^{\top}\vec c\,'(0)=-\mathbf 1^{\top}\D_{\theta}^{-1}(\mathbb{I}-A)\vec t
+=-\vec t^{\top}(\mathbb{I}-A)\vec t$, using
+$\mathbf 1^{\top}\D_{\theta}^{-1}=\vec t^{\top}$. Since
+$\bth=m/(\mathbf 1^{\top}\vec c)$,
+$\bth'=-m(\mathbf 1^{\top}\vec c\,')/(\mathbf 1^{\top}\vec c)^{2}$, which gives
+\eqref{eq:deriv0}. For the second claim, row and column sums of $A$ both equal
+one, so
+$\sum_{a,j}A_{aj}(t_a^{2}+t_j^{2})/2
+=\tfrac12\big(\sum_at_a^{2}+\sum_jt_j^{2}\big)=\vec t^{\top}\vec t$, and
+therefore
+$\tfrac12\sum_{a,j}A_{aj}(t_a-t_j)^{2}
+=\vec t^{\top}\vec t-\vec t^{\top}A\vec t$, which is \eqref{eq:dirichlet}. For
+the last claim take
+%
+\begin{equation*}
+A=\begin{pmatrix}0&1&0\\1&0&0\\0&1&0\end{pmatrix},
+\qquad
+\vec\theta=(1,1,2),
+\qquad
+\vec t=\big(1,1,\tfrac12\big),
+\end{equation*}
+%
+which satisfies Assumption~\ref{ass:norm} and has column sums $(1,2,0)$. Here
+$A\vec t=\mathbf 1$, so $\vec t^{\top}A\vec t=\tfrac52$ while
+$\vec t^{\top}\vec t=\tfrac94$, giving
+$\vec t^{\top}(\mathbb{I}-A)\vec t=-\tfrac14$ and
+$\bth'(0)=3(-\tfrac14)/(\tfrac52)^{2}=-\tfrac{3}{25}<0$.
+\end{proof}
+
+In that example the two least risk averse investors absorb all the attention and
+the most risk averse receives none, so $\vec\pi=(\tfrac12,\tfrac12,0)$ and
+$\vec\pi^{\top}\vec\theta=1<\tfrac65=H(\theta)$. The effect is negative at the
+origin and the limit lies below the starting value, and $\bth$ in fact falls
+monotonically from $6/5$ to $1$. It is the complement of
+Proposition~\ref{prop:reversal} below, where the marginal effect is positive and
+the decline sets in only at higher intensity.
+
+Equation \eqref{eq:dirichlet} is a Dirichlet form: the marginal effect of
+comparison is a weighted sum of squared differences in risk tolerance across
+the links of the network. It is positive exactly when investors look at
+somebody unlike themselves, and the relevant notion of ``unlike'' is difference
+in tolerance, not in aversion. Double stochasticity is what makes the quadratic
+form a Dirichlet form; economically it says that attention is balanced, each
+investor receiving as much of it as he gives. It is the balance of attention,
+not the profile of tolerances, that the condition constrains: for a given
+$\vec t$ the form may well be non-negative without it, but double stochasticity
+is what makes it non-negative for \emph{every} $\vec t$.
+
+\subsection{The limit of intense comparison}
+\label{sec:intense}
+
+The other end of the family is governed by the stationary distribution of $A$
+read as a Markov chain. Let $C_1,\dots,C_r$ be its recurrent classes,
+$\vec\pi^{(k)}$ the stationary distribution on $C_k$ normalised to sum to one,
+and $h_k(a)$ the probability that a chain started at $a$ is absorbed into
+$C_k$.
+
+\begin{lemma}
+\label{lem:bound}
+$c_a\leq1/\min_b\theta_b$ for every $a$ and every $\lambda\geq0$.
+\end{lemma}
+
+\begin{proof}
+Let $c^{*}=c_{a^{*}}$ be the largest entry. Row $a^{*}$ of \eqref{eq:system}
+reads $(\theta_{a^{*}}+\lambda)c^{*}=1+\lambda\sum_jA_{a^{*}j}c_j\leq1+\lambda c^{*}$,
+so $\theta_{a^{*}}c^{*}\leq1$.
+\end{proof}
+
+\begin{theorem}
+\label{thm:intense}
+Let Assumption~\ref{ass:norm} hold and $\lambda_a=\lambda$. Then
+%
+\begin{equation}
+\lim_{\lambda\to\infty}\bth(\lambda)
+=\frac{m}{\displaystyle\sum_{k=1}^{r}
+\frac{\mathbf 1^{\top}\vec h_k}{\vec\pi^{(k)\top}\vec\theta}} .
+\label{eq:intense}
+\end{equation}
+%
+In particular, if $A$ has a single recurrent class with stationary distribution
+$\vec\pi$, then $\bth(\lambda)\to\vec\pi^{\top}\vec\theta$.
+\end{theorem}
+
+\begin{proof}
+The kernel of $\mathbb{I}-A$ is spanned by the absorption vectors
+$\vec h_1,\dots,\vec h_r$, which satisfy $\sum_k\vec h_k=\mathbf 1$. Dividing
+$M(\lambda)\vec c=\mathbf 1$ by $\lambda$ gives
+$(\lambda^{-1}\D_{\theta}+\mathbb{I}-A)\vec c=\lambda^{-1}\mathbf 1$, and
+$\vec c$ is bounded by Lemma~\ref{lem:bound}, so any limit point $\vec c_\infty$
+satisfies $(\mathbb{I}-A)\vec c_\infty=0$, that is
+$\vec c_\infty=\sum_k\kappa_k\vec h_k$. To identify $\kappa_k$, extend
+$\vec\pi^{(k)}$ by zero off $C_k$ and left-multiply $M(\lambda)\vec c=\mathbf 1$
+by $\vec\pi^{(k)\top}$. Since $C_k$ is closed, $\vec\pi^{(k)\top}A=\vec\pi^{(k)\top}$,
+so the term in $\lambda$ vanishes identically and
+$\vec\pi^{(k)\top}\D_{\theta}\vec c=1$ for every $\lambda$. Passing to the limit
+and using $h_l=\delta_{kl}$ on $C_k$ gives
+$\kappa_k\,\vec\pi^{(k)\top}\vec\theta=1$. Then
+$\mathbf 1^{\top}\vec c_\infty=\sum_k\kappa_k\mathbf 1^{\top}\vec h_k$, and
+$\bth=m/(\mathbf 1^{\top}\vec c)$ gives \eqref{eq:intense}. The limit point is
+unique, so the whole family converges.
+\end{proof}
+
+Theorem~\ref{thm:intense} is the organising result of the paper. Under intense
+comparison the aggregate is no longer the harmonic mean of net risk aversion
+but a \emph{stationary} average: influence, not population, does the weighting.
+Reading $\bth(0)=H(\theta)$ against \eqref{eq:intense} gives at once a
+sufficient condition for the comparison to lower the effective coefficient,
+%
+\begin{equation}
+\vec\pi^{\top}\vec\theta<H(\theta)
+\quad\Longrightarrow\quad
+\bth(\lambda)<\bth(0)\ \text{ for all large }\lambda ,
+\label{eq:revcond}
+\end{equation}
+%
+in the single-class case. Reversal is therefore not an artefact of small
+examples but a statement about the correlation between net risk aversion and
+stationary influence: it occurs when the investors who attract attention in the
+long run are less risk averse than the population as a whole. The three results
+that follow are the three ways \eqref{eq:intense} can turn out.
+
+\subsection{The mean-field limit}
+
+\begin{proposition}
+\label{prop:mf}
+Let $\lambda_a=\lambda$ for all $a$ and consider a sequence of economies
+indexed by $m$ in which the empirical distribution of $\theta_a$ converges
+weakly to a law. Suppose the networks satisfy
+%
+\begin{equation}
+\theta_a\geq\underline\theta>0\ \text{ for all }a,\ m,
+\qquad
+\delta_m\;=\;\max_a\Big\|A_{a\cdot}-\tfrac1m\mathbf 1\Big\|_1\longrightarrow0 .
+\label{eq:primitive}
+\end{equation}
+%
+Then, writing $\bth_m$ for the effective
+coefficient of the $m$-investor economy,
+%
+\begin{equation}
+\bth_m(\lambda)\longrightarrow \bth_\infty(\lambda)=H(\theta+\lambda)-\lambda,
+\qquad H(x)=\big(\E[1/x]\big)^{-1} .
+\label{eq:mf}
+\end{equation}
+%
+The limit $\bth_\infty$ is differentiable wherever the moments below exist,
+and
+%
+\begin{equation}
+\frac{d\bth_\infty}{d\lambda}
+=\frac{\mathrm{Var}\big[(\theta+\lambda)^{-1}\big]}
+{\E\big[(\theta+\lambda)^{-1}\big]^{2}}\;\geq\;0 ,
+\label{eq:cv2}
+\end{equation}
+%
+with equality if and only if $\theta$ is degenerate. If moreover
+$\E[\theta^3]<\infty$ then
+$\bth_\infty=\E[\theta]-\mathrm{Var}(\theta)/\lambda+O(\lambda^{-2})$ as
+$\lambda\to\infty$. Equation \eqref{eq:cv2} is the derivative of the limit;
+we do not claim it is the limit of the derivatives of the finite economies.
+\end{proposition}
+
+\begin{proof}
+Since $\theta_a\geq\underline\theta$, the variable $(\theta+\lambda)^{-1}$ is
+bounded by $(\underline\theta+\lambda)^{-1}$, so weak convergence alone gives
+convergence of $\E[(\theta+\lambda)^{-1}]$ and no separate integrability
+hypothesis is needed. By Lemma~\ref{lem:bound},
+$\|\vec c\|_\infty\leq1/\underline\theta$ uniformly in $m$ and $\lambda$. Hence
+$\big|\sum_jA_{aj}c_j-\bar c_m\big|
+=\big|(A_{a\cdot}-m^{-1}\mathbf 1)^{\top}\vec c\big|
+\leq\delta_m\|\vec c\|_\infty\leq\delta_m/\underline\theta\to0$
+uniformly in $a$, which is the mixing condition in endogenous form and is where
+the uniform bound is needed. Under it, row $a$ of \eqref{eq:system} becomes
+$(\theta_a+\lambda)c_a=1+\lambda\bar c$ in the limit, so
+$c_a=(1+\lambda\bar c)/(\theta_a+\lambda)$. Averaging and writing
+$M=\E[(\theta+\lambda)^{-1}]$ gives $\bar c=M/(1-\lambda M)$ and
+$\bth=1/M-\lambda$. Differentiating gives \eqref{eq:cv2}, whose sign is
+Cauchy--Schwarz, with equality only for degenerate $\theta$. The expansion
+follows from
+$\E[(\theta+\lambda)^{-1}]
+=\lambda^{-1}\big(1-\E[\theta]/\lambda+\E[\theta^{2}]/\lambda^{2}
++O(\lambda^{-3})\big)$, which requires the third moment to control the
+remainder.
+\end{proof}
+
+In this limit comparison interpolates the aggregation of risk aversion between
+the two classical aggregators: the harmonic mean at $\lambda=0$, which is the
+standard CARA result, and the arithmetic mean as $\lambda\to\infty$. Since
+$H(\theta)\leq\E[\theta]$, the largest increase in the effective coefficient
+available is the harmonic--arithmetic gap of the net risk-aversion
+distribution, a
+statistic of the cross-section rather than a free parameter.
+
+Condition \eqref{eq:primitive} is primitive: it constrains only $A$ and the
+support of $\theta$. The leave-one-out network $A_{aj}=1/(m-1)$, $j\neq a$, has
+$\delta_m=2/m$ exactly, so it qualifies; exact equality at finite $m$ would
+require identical rows, which Assumption~\ref{ass:norm} forbids since
+$A_{aa}=0$. More generally $\delta_m$ is twice the total-variation distance of
+each row from the uniform distribution, so \eqref{eq:primitive} asks that every
+investor's benchmark be close to the population average --- which is what
+``mean field'' should mean, and is checkable from the network alone. The uniform
+lower bound $\underline\theta$ cannot be dropped: it is what converts closeness
+of rows into closeness of benchmarks, since $\vec c$ is controlled only through
+Lemma~\ref{lem:bound}.
+
+\begin{remark}[Consistency with Theorem~\ref{thm:intense}]
+\label{rem:consistency}
+Condition \eqref{eq:primitive} forces the stationary distribution towards the
+uniform one, and \eqref{eq:intense} then returns
+$\vec\pi^{\top}\vec\theta\to\E[\theta]$, which is the $\lambda\to\infty$ end of
+\eqref{eq:mf}. The mean-field regime is thus the case of
+Theorem~\ref{thm:intense} in which influence is spread evenly, and
+$\bth'(0)\geq0$ in it because near-uniform rows are near doubly stochastic, so
+\eqref{eq:dirichlet} applies approximately. Both directions of the interpolation
+are consequences of the two limits.
+\end{remark}
+
+\subsection{Non-monotonicity and sign reversal}
+\label{sec:reversal}
+
+\begin{proposition}
+\label{prop:reversal}
+There exist normalised benchmarks and net risk-aversion profiles for which
+$d\bth/d\lambda<0$ on a non-empty interval and for which
+$\bth(\lambda)<\bth(0)$ at sufficiently large comparison intensities.
+\end{proposition}
+
+\begin{proof}
+Take $m=3$, $\theta=(\tfrac12,1,2)$, $\lambda_a=\lambda$ and
+%
+\begin{equation*}
+A=\begin{pmatrix}0&1&0\\1&0&0\\1&0&0\end{pmatrix},
+\end{equation*}
+%
+which satisfies Assumption~\ref{ass:norm}. Solving \eqref{eq:system} gives
+%
+\begin{equation}
+\bth(\lambda)=\frac{3(\lambda+2)(3\lambda+1)}{12\lambda^{2}+24\lambda+7},
+\qquad
+\bth'(\lambda)=-\frac{3\big(12\lambda^{2}+6\lambda-1\big)}
+{\big(12\lambda^{2}+24\lambda+7\big)^{2}} .
+\label{eq:cex}
+\end{equation}
+%
+Hence $\bth'(0)=3/49>0$ and $\bth'(\lambda)<0$ for
+$\lambda>(\sqrt{21}-3)/12\approx0.132$. The function rises from
+$\bth(0)=6/7\approx0.857$ to a maximum $\approx0.860$ at that point, then
+falls, returning to $6/7$ at $\lambda=1/3$ and continuing downwards:
+$\bth(1)=0.837209$ and $\bth(2)=0.815534$.
+\end{proof}
+
+Both features of the example are read off the two limits of
+Section~\ref{sec:marginal} and Section~\ref{sec:intense}, and neither depends on
+the closed form. The column sums of $A$ are $(2,1,0)$, so $A$ is not doubly
+stochastic and \eqref{eq:dirichlet} does not apply; \eqref{eq:deriv0}
+nonetheless returns $\bth'(0)=3/49>0$, so comparison initially raises the
+effective coefficient. At the other end, investor~3 is transient and
+$\{1,2\}$ is the unique recurrent class, with $\vec\pi=(\tfrac12,\tfrac12,0)$.
+Theorem~\ref{thm:intense} therefore gives
+%
+\begin{equation*}
+\lim_{\lambda\to\infty}\bth(\lambda)
+=\vec\pi^{\top}\vec\theta=\tfrac12\big(\tfrac12+1\big)=\tfrac34
+\;<\;\tfrac67=H(\theta)=\bth(0),
+\end{equation*}
+%
+so \eqref{eq:revcond} holds and reversal is forced. The economics is now
+explicit. The most risk averse investor watches the least risk averse and is
+watched by nobody, so stationary influence assigns him weight zero: his risk
+aversion is present in the harmonic mean at $\lambda=0$ and absent from the
+stationary mean at $\lambda=\infty$. Non-monotonicity is the collision of the
+two limits --- a positive marginal effect at the origin with a strictly lower
+value at infinity --- and the closed form only locates the turning point.
+
+How often reversal occurs is a question about a distribution over networks, and
+the answer is a property of that distribution rather than of the mechanism.
+Under a dense i.i.d.-weight design, specified in the supplement, it becomes rare
+as the number of investors grows. That ensemble does not satisfy
+\eqref{eq:primitive}: normalised i.i.d.\ rows stay a fixed distance from the
+uniform row, since $\sum_kU_{ak}\sim m/2$ makes
+$\delta_m\to\E|2U-1|=\tfrac12$. Incoming influence and stationary weights
+nonetheless become increasingly balanced, and the numerical mixing deviation
+$\max_a|\sum_jA_{aj}c_j-\bar c|$ falls with $m$ while $\bth'(0)$ approaches the
+mean-field value $\mathrm{CV}^{2}(\vec t)$; what does this is not convergence of
+rows but a law of large numbers, the weights being drawn independently of the
+types. We make no formal convergence claim for the ensemble. Nothing in this
+licenses a claim about networks in general --- least of all because the
+independence it relies on is exactly what homophily destroys. Real influence structures carry
+communities, hubs and correlation between characteristics and position, and
+Remark~\ref{rem:blocks} shows that reversal survives at any population size once
+such structure is present.
+A supplement reports the frequency of both the cumulative event
+$\bth(0.5)<\bth(0)$ and the marginal event $\bth'(0.5)<0$ over $20{,}000$ draws
+at each of ten combinations of population size and dispersion, together with the
+generators, the seeds and the analytic derivative used. Reversal is already
+below one per cent at $m=6$ and indistinguishable from zero at $m\geq10$ in that
+ensemble.
+
+\begin{remark}[Reversal at any population size]
+\label{rem:blocks}
+The decay reported in the supplement reflects mixing, not size. Because
+\eqref{eq:system} is local, a block-diagonal $A$ decouples: each block solves
+its own system and $\bth=\big(m^{-1}\sum_ac_a\big)^{-1}$ is the reciprocal of
+the population-average capacity. Replicating an identical block leaves that
+average, and hence $\bth$, unchanged. Taking $k$ disjoint copies of the network
+of Proposition~\ref{prop:reversal} therefore gives $\bth(\lambda)$ independent
+of $k$, so that $\bth(1)=0.837209<6/7=\bth(0)$ at $m=3k$ for every $k$; we verify
+this numerically up to $m=3000$. The construction is robust to weak ties across
+blocks: mixing each row with a fraction $\epsilon$ of the uniform complete
+network preserves the reversal at $m=30$ for $\epsilon\leq0.1$
+($\bth(1)=0.8526$ at $\epsilon=0.1$) and destroys it by $\epsilon=0.2$
+($\bth(1)=0.8681$). The simulation should therefore be read as describing a
+dense ensemble in which local benchmarks approach a common average, and not as
+a claim about large networks in general: block structure, or any persistent
+correlation between type and network position, sustains the reversal at
+arbitrary population size.
+
+Note the contrast with Proposition~\ref{prop:homophily}, which uses the same
+block structure to the opposite end. There net risk aversion is constant
+\emph{within} blocks and the mechanism vanishes; here it is heterogeneous
+within blocks and absent \emph{across} them, and the mechanism survives at any
+scale. What separates the two is where the heterogeneity sits relative to the
+partition, not the topology.
+\end{remark}
+
+\subsection{Perfect homophily blocks the mechanism}
+
+\begin{proposition}
+\label{prop:homophily}
+Partition the investors into groups such that $A_{aj}=0$ whenever $a$ and $j$
+belong to different groups, and suppose $\theta_a$ is constant within each
+group. Then $c_a=1/\theta_a$ solves \eqref{eq:system} for every profile
+$(\lambda_1,\dots,\lambda_m)$, and $\bth$ equals the harmonic mean of $\theta$
+regardless of the intensity of comparison.
+\end{proposition}
+
+\begin{proof}
+Row $a$ of \eqref{eq:system} reads
+$(\theta_a+\lambda_a)c_a-\lambda_a\sum_jA_{aj}c_j=1$. If $c_j=1/\theta_j$ and
+$\theta_j=\theta_a$ for every $j$ with $A_{aj}>0$, the left-hand side is
+$(\theta_a+\lambda_a)/\theta_a-\lambda_a/\theta_a=1$. Uniqueness gives the
+claim, and $\bth=m/\sum_a(1/\theta_a)$ is the harmonic mean of $\theta$.
+\end{proof}
+
+Theorem~\ref{thm:intense} explains why. Each group is a recurrent class, so
+$r>1$, and $\theta$ is constant on $C_k$, whence
+$\vec\pi^{(k)\top}\vec\theta=\theta_k$ whatever the stationary distribution
+inside the class. With every investor in some class, $\mathbf 1^{\top}\vec h_k$
+is the size $m_k$ of the class and \eqref{eq:intense} reads
+$m/\sum_km_k/\theta_k=H(\theta)$. The two limits therefore coincide, which is
+the strongest possible form of neutrality of the aggregate: not that $\bth$
+returns to $H(\theta)$, but that it never leaves. With two equally sized groups
+at $\theta\in\{0.5,2\}$, $\bth=0.8$ at $\lambda=0$, at $\lambda=1$ and at
+$\lambda=1000$; the arithmetic mean $1.25$ that Proposition~\ref{prop:mf} would
+predict is never approached.
+
+The hypothesis is exact segregation together with exact constancy of $\theta$
+within blocks, and both are needed: if $\theta$ varies inside a class then
+$\vec\pi^{(k)\top}\vec\theta\neq\theta_k$ and \eqref{eq:intense} moves, as
+Remark~\ref{rem:blocks} exploits. So the correct statement is that
+\emph{perfect homophily by net risk-aversion type} suppresses the mechanism, not
+that homophily does. It is worth knowing because assortativity on wealth and on
+financial sophistication is a documented feature of social networks
+\cite{mcpherson,bailey}.
+
+%=====================================================================
+
+%=====================================================================
+\section{Conclusion}
+
+Relative wealth concerns in a CARA economy aggregate through the influence
+network in a way that two limits organise. The marginal effect at
+zero comparison is a quadratic form in risk tolerances, which is a Dirichlet
+form --- and so non-negative --- exactly when attention is balanced. The limit
+under intense comparison is a stationary average of individual coefficients,
+weighted by influence rather than by population. They anchor the two ends of the family rather than tracing the path between
+them, but between them they account for the mean-field interpolation from the
+harmonic to the arithmetic mean, for non-monotonicity and sign reversal, and
+for the complete inertness of the aggregate under perfect homophily by type. What decides which
+case obtains is the correlation between net risk aversion and stationary
+influence.
+
+Because the economy is closed, these are statements about prices and not only
+about a conditional relation. Equilibrium prices are
+$\vec p=(\vec\mu-\theta_MV\vec\nu)/R_f$ and the market Sharpe ratio is
+$\bth\sqrt{\vec\nu^{\top}V\vec\nu}/m$, both explicit, because CARA demands carry
+no wealth effects and $\theta_M$ therefore does not depend on prices. A network that lowers $\bth$ compresses the market risk premium and the market
+Sharpe ratio. Its effect on an individual price has the sign of
+$(V\vec\nu)_i$, so assets that covary positively with the market payoff rise
+while hedges fall; and under the zero-net-supply closure, where
+$\vec\nu^{\top}\vec p$ is pinned to aggregate initial wealth, the riskless rate
+rises and value is redistributed across assets rather than created.
+
+One boundary should be kept in view. Here $\theta_a$ is risk aversion net of the
+comparison, not the coefficient of absolute risk aversion in own wealth, so
+``common risk aversion'' in Theorem~\ref{thm:neutral} means a common value of
+the product $\alpha_a(1-\gamma_a)$, along which stronger comparison motives come
+paired with greater own-wealth risk aversion.
+
+The practical reading is that a representative-agent treatment of relative
+concerns reproduces the mean-field case and is safe only where influence is
+close to evenly spread. Where attention is unbalanced --- where some investors
+are watched much more than they watch --- it can err in sign. Two questions
+follow naturally. The first is quantitative: how far can
+$\vec\pi^{\top}\vec\theta$ fall below $H(\theta)$ for networks with realistic
+degree distributions and realistic correlation between risk aversion and
+centrality? The second is empirical: stationary influence is in principle
+measurable, and Theorem~\ref{thm:intense} converts it into a prediction about
+the aggregate.
+
+%=====================================================================
+\section*{Replication}
+\label{sec:replication}
+
+All numerical results are reproducible from the repository
+%
+\begin{center}
+\url{https://github.com/renatovicente/price-of-risk-aggregation}
+\end{center}
+%
+The module \texttt{scripts/network.py} solves \eqref{eq:system};
+\texttt{scripts/neutrality.py} verifies Theorem~\ref{thm:neutral} and
+Proposition~\ref{prop:mf}; \texttt{scripts/sign\_reversal.py} produces
+the table in the supplement, including the network and type generators and
+the seeds; \texttt{scripts/block\_reversal.py} produces the block replication and
+the mixing robustness of Remark~\ref{rem:blocks}; and
+\texttt{scripts/characterization.py} checks Theorems~\ref{thm:deriv} and
+\ref{thm:intense}, the Dirichlet identity \eqref{eq:dirichlet}, the bound of
+Lemma~\ref{lem:bound} and each of the three cases of \eqref{eq:intense}; and
+\texttt{scripts/closed\_economy.py} checks the first-order conditions
+\eqref{eq:foc} against direct numerical optimisation, market clearing, the price
+formula \eqref{eq:price}, the recovery of \eqref{eq:clear} and the Sharpe
+identity \eqref{eq:sharpe}. The scripts depend only on
+\texttt{numpy} and \texttt{scipy}, read no data and draw from fixed seeds;
+\texttt{./reproduce.sh} runs all six in about fifteen seconds.
+
+%=====================================================================
+\begin{thebibliography}{99}
+
+\bibitem{abel} A. B. Abel,
+\emph{Asset prices under habit formation and catching up with the Joneses},
+American Economic Review Papers and Proceedings 80 (1990) 38--42.
+
+\bibitem{ballester} C. Ballester, A. Calv\'o-Armengol, Y. Zenou,
+\emph{Who's who in networks. Wanted: the key player},
+Econometrica 74 (2006) 1403--1417.
+
+\bibitem{campbell} J. Y. Campbell, J. H. Cochrane,
+\emph{By force of habit: a consumption-based explanation of aggregate stock
+market behavior}, Journal of Political Economy 107 (1999) 205--251.
+
+\bibitem{chankogan} Y. L. Chan, L. Kogan,
+\emph{Catching up with the Joneses: heterogeneous preferences and the dynamics
+of asset prices}, Journal of Political Economy 110 (2002) 1255--1285.
+
+\bibitem{degennaro} L. De Gennaro Aquino, E. G. De Giorgi, Y. Lou, M. S. Strub,
+\emph{Investment and asset pricing with relative wealth concerns and multiple
+risky assets},
+The North American Journal of Economics and Finance 84 (2026) 102628.
+
+\bibitem{bailey} M. Bailey, R. Cao, T. Kuchler, J. Stroebel,
+\emph{The economic effects of social networks: evidence from the housing
+market}, Journal of Political Economy 126 (2018) 2224--2276.
+
+\bibitem{bermanplemmons} A. Berman, R. J. Plemmons,
+\emph{Nonnegative Matrices in the Mathematical Sciences},
+SIAM, Philadelphia, 1994.
+
+\bibitem{demarzo04} P. DeMarzo, R. Kaniel, I. Kremer,
+\emph{Diversification as a public good: community effects in portfolio choice},
+Journal of Finance 59 (2004) 1677--1716.
+
+\bibitem{dupor} B. Dupor, W.-F. Liu,
+\emph{Jealousy and equilibrium overconsumption},
+American Economic Review 93 (2003) 423--428.
+
+\bibitem{gali} J. Gal\'i,
+\emph{Keeping up with the Joneses: consumption externalities, portfolio choice,
+and asset prices},
+Journal of Money, Credit and Banking 26 (1994) 1--8.
+
+\bibitem{gollier} C. Gollier,
+\emph{Wealth inequality and asset pricing},
+Review of Economic Studies 68 (2001) 181--203.
+
+\bibitem{gomez} J.-P. G\'omez,
+\emph{The impact of keeping up with the Joneses behavior on asset prices and
+portfolio choice},
+Finance Research Letters 4 (2007) 95--103.
+
+\bibitem{kraft} H. Kraft, A. Meyer-Wehmann, F. T. Seifried,
+\emph{Dynamic asset allocation with relative wealth concerns in incomplete
+markets},
+Journal of Economic Dynamics and Control 113 (2020) 103857.
+
+\bibitem{lacker} D. Lacker, T. Zariphopoulou,
+\emph{Mean field and $n$-agent games for optimal investment under relative
+performance criteria},
+Mathematical Finance 29 (2019) 1003--1038.
+
+\bibitem{mcpherson} M. McPherson, L. Smith-Lovin, J. M. Cook,
+\emph{Birds of a feather: homophily in social networks},
+Annual Review of Sociology 27 (2001) 415--444.
+
+\bibitem{panageas} S. Panageas,
+\emph{The implications of heterogeneity and inequality for asset pricing},
+NBER Working Paper 26974 (2020).
+
+\end{thebibliography}

@@ -18,6 +18,8 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\bth}{\bar\theta}
 \newcommand{\D}{\mathbb{D}}
+% no PDF combinado as referencias ao artigo viram \ref de verdade
+\newcommand{\paperref}[3]{#2~\ref{#1}}
 
 \title{Relative Wealth Concerns, Network Aggregation,\\
 and Effective Risk Aversion}
@@ -30,5 +32,23 @@ S\~ao Paulo. \texttt{rvicente@ime.usp.br}}}
 \maketitle
 
 \input{body-paper}
+
+\clearpage
+\setcounter{section}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+\begin{center}
+{\Large\bfseries Supplementary Material}\\[2ex]
+{\large\itshape Relative Wealth Concerns, Network Aggregation,\\
+and Effective Risk Aversion}\\[1ex]
+Renato Vicente
+\end{center}
+\bigskip
+
+\input{body-supplement}
 
 \end{document}
